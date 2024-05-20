@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :feedbacks
-  resources :orders
   resources :books
   resources :authors
+  resources :feedback_books
+  resources :feedback_authors
+  devise_for :users
+  resources :orders
   ActiveAdmin.routes(self)
   resources :sellers
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

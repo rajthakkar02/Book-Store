@@ -1,10 +1,10 @@
-<%= form_with(model: feedback) do |form| %>
-  <% if feedback.errors.any? %>
+<%= form_with(model: feedback_author) do |form| %>
+  <% if feedback_author.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
+      <h2><%= pluralize(feedback_author.errors.count, "error") %> prohibited this feedback_author from being saved:</h2>
 
       <ul>
-        <% feedback.errors.each do |error| %>
+        <% feedback_author.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -22,13 +22,8 @@
   </div>
 
   <div>
-    <%= form.label :book_id, style: "display: block" %>
-    <%= form.text_field :book_id %>
-  </div>
-
-  <div>
     <%= form.label :feedback, style: "display: block" %>
-    <%= form.text_area :feedback %>
+    <%= form.text_field :feedback %>
   </div>
 
   <div>

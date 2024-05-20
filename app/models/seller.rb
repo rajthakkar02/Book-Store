@@ -6,4 +6,5 @@ class Seller < ApplicationRecord
   has_many :books
   has_many :orders
   has_many :users
+  has_many :authors
 end

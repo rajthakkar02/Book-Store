@@ -2,12 +2,10 @@
 
 one:
   user: one
-  author: one
   book: one
-  feedback: MyText
+  feedback: MyString
 
 two:
   user: two
-  author: two
   book: two
-  feedback: MyText
+  feedback: MyString

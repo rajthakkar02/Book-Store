@@ -16,7 +16,7 @@ class AuthorsTest < ApplicationSystemTestCase
 
     fill_in "Email", with: @author.email
     fill_in "Name", with: @author.name
-    fill_in "Phone no", with: @author.phone_no
+    fill_in "Seller", with: @author.seller_id
     click_on "Create Author"
 
     assert_text "Author was successfully created"
@@ -29,7 +29,7 @@ class AuthorsTest < ApplicationSystemTestCase
 
     fill_in "Email", with: @author.email
     fill_in "Name", with: @author.name
-    fill_in "Phone no", with: @author.phone_no
+    fill_in "Seller", with: @author.seller_id
     click_on "Update Author"
 
     assert_text "Author was successfully updated"

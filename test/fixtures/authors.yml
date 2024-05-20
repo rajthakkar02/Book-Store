@@ -3,9 +3,9 @@
 one:
   name: MyString
   email: MyString
-  phone_no: MyString
+  seller: one
 
 two:
   name: MyString
   email: MyString
-  phone_no: MyString
+  seller: two

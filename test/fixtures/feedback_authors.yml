@@ -1,15 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  book_name: MyString
+  user: one
   author: one
-  seller: one
-  price: 1
-  quantity: 1
+  feedback: MyString
 
 two:
-  book_name: MyString
+  user: two
   author: two
-  seller: two
-  price: 1
-  quantity: 1
+  feedback: MyString

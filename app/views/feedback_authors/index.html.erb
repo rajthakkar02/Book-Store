@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Feedback authors</h1>
+
+<div id="feedback_authors">
+  <% @feedback_authors.each do |feedback_author| %>
+    <%= render feedback_author %>
+    <p>
+      <%= link_to "Show this feedback author", feedback_author %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New feedback author", new_feedback_author_path %>

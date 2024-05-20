@@ -2,6 +2,7 @@
   <% if book.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+
       <ul>
         <% book.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -9,32 +10,32 @@
       </ul>
     </div>
   <% end %>
+
   <div>
     <%= form.label :book_name, style: "display: block" %>
     <%= form.text_field :book_name %>
   </div>
+
   <div>
-    <%=form.label :book_file%>
-    <%=form.file_field :book_file , accept: "image/jpeg,image/gif,image/png"%>
+    <%= form.label :author_id, style: "display: block" %>
+    <%= form.text_field :author_id %>
   </div>
+
+  <div>
+    <%= form.label :seller_id, style: "display: block" %>
+    <%= form.text_field :seller_id %>
+  </div>
+
   <div>
     <%= form.label :price, style: "display: block" %>
     <%= form.number_field :price %>
   </div>
+
   <div>
     <%= form.label :quantity, style: "display: block" %>
     <%= form.number_field :quantity %>
   </div>
 
-  <div>
-    <%= form.label :author_id, style: "display: block" %>
-    <%= form.select :category, Author.all.collect {|x| [x.name, x.id]} %>
-  </div>
-
-  <div>
-    <%= form.label :seller_id, style: "display: block" %>
-    <%= form.select :category, Seller.all.collect {|x| [x.name, x.id]} %>
-  </div>
   <div>
     <%= form.submit %>
   </div>

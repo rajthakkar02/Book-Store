@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_16_110540) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_20_133214) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,33 +59,42 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110540) do
   create_table "authors", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "phone_no"
+    t.bigint "seller_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["seller_id"], name: "index_authors_on_seller_id"
   end
 
   create_table "books", force: :cascade do |t|
     t.string "book_name"
-    t.integer "price"
-    t.integer "quantity"
     t.bigint "author_id", null: false
     t.bigint "seller_id", null: false
+    t.integer "price"
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_books_on_author_id"
     t.index ["seller_id"], name: "index_books_on_seller_id"
   end
 
-  create_table "feedbacks", force: :cascade do |t|
+  create_table "feedback_authors", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "author_id"
-    t.bigint "book_id"
-    t.text "feedback"
+    t.bigint "author_id", null: false
+    t.string "feedback"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_feedbacks_on_author_id"
-    t.index ["book_id"], name: "index_feedbacks_on_book_id"
-    t.index ["user_id"], name: "index_feedbacks_on_user_id"
+    t.index ["author_id"], name: "index_feedback_authors_on_author_id"
+    t.index ["user_id"], name: "index_feedback_authors_on_user_id"
+  end
+
+  create_table "feedback_books", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.string "feedback"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_feedback_books_on_book_id"
+    t.index ["user_id"], name: "index_feedback_books_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -123,11 +132,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110540) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "authors", "sellers"
   add_foreign_key "books", "authors"
   add_foreign_key "books", "sellers"
-  add_foreign_key "feedbacks", "authors"
-  add_foreign_key "feedbacks", "books"
-  add_foreign_key "feedbacks", "users"
+  add_foreign_key "feedback_authors", "authors"
+  add_foreign_key "feedback_authors", "users"
+  add_foreign_key "feedback_books", "books"
+  add_foreign_key "feedback_books", "users"
   add_foreign_key "orders", "books"
   add_foreign_key "orders", "users"
 end
