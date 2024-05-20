@@ -11,11 +11,13 @@ gem "sprockets-rails"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
+gem 'bootstrap', '~> 5.2', '>= 5.2.3'
+
 gem 'activeadmin'
 
- gem 'bcrypt'
+gem 'bcrypt'
 
- gem 'active_storage_validations', '~> 1.0', '>= 1.0.4'
+gem 'active_storage_validations', '~> 1.0', '>= 1.0.4'
 
 gem 'devise', '~> 4.9', '>= 4.9.2'
 

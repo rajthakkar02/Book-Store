@@ -7,13 +7,13 @@ ActiveAdmin.register Order do
   #
   form do |f|
     f.inputs do
-      f.input :user, as: :select, collection: User.all.map { |user| [user.email, user.id] }
-      f.input :book, as: :select, collection: Book.all.map { |book| [book.name, book.id] }
+      f.input :user, as: :select, collection: User.all.map { |user| [user.email, user.id]}
+      f.input :book, as: :select, collection: Book.all.map { |book| [book.book_name, book.id] }
       f.input :quantity_of_book_order
     end
     f.actions
   end
-  # permit_params :user_id, :book_id, :quantity_of_book_order
+  permit_params :user_id, :book_id, :quantity_of_book_order
   #
   # or
   #

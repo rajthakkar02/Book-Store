@@ -6,4 +6,5 @@ class Order < ApplicationRecord
     Shipped: 1,
     Delivered: 2 
   }
+  validates :quantity_of_book_order , numericality: {greater_than_or_equal_to: 0}
 end
