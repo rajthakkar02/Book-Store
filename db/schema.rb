@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_20_133214) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_21_120204) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -77,24 +77,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_20_133214) do
     t.index ["seller_id"], name: "index_books_on_seller_id"
   end
 
-  create_table "feedback_authors", force: :cascade do |t|
+  create_table "feedbacks", force: :cascade do |t|
+    t.text "comment"
     t.bigint "user_id", null: false
-    t.bigint "author_id", null: false
-    t.string "feedback"
+    t.string "commentable_type", null: false
+    t.bigint "commentable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_feedback_authors_on_author_id"
-    t.index ["user_id"], name: "index_feedback_authors_on_user_id"
-  end
-
-  create_table "feedback_books", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "book_id", null: false
-    t.string "feedback"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_feedback_books_on_book_id"
-    t.index ["user_id"], name: "index_feedback_books_on_user_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_feedbacks_on_commentable"
+    t.index ["user_id"], name: "index_feedbacks_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -135,10 +126,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_20_133214) do
   add_foreign_key "authors", "sellers"
   add_foreign_key "books", "authors"
   add_foreign_key "books", "sellers"
-  add_foreign_key "feedback_authors", "authors"
-  add_foreign_key "feedback_authors", "users"
-  add_foreign_key "feedback_books", "books"
-  add_foreign_key "feedback_books", "users"
+  add_foreign_key "feedbacks", "users"
   add_foreign_key "orders", "books"
   add_foreign_key "orders", "users"
 end

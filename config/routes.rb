@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
+  resources :feedbacks
   resources :books
   resources :authors
-  resources :feedback_books
-  resources :feedback_authors
   devise_for :users
   resources :orders
   ActiveAdmin.routes(self)

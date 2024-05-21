@@ -4,6 +4,13 @@
     <%= book.book_name %>
   </p>
 
+
+  <p>
+    <strong>Book Image:</strong>
+    <%= image_tag book.book_image if book.book_image.attached? %>
+  </p>
+  
+
   <p>
     <strong>Author:</strong>
     <%= book.author_id %>

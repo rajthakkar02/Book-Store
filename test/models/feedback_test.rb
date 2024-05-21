@@ -1,6 +1,6 @@
 require "test_helper"
 
-class FeedbackBookTest < ActiveSupport::TestCase
+class FeedbackTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
