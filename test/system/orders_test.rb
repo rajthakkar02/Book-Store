@@ -16,6 +16,7 @@ class OrdersTest < ApplicationSystemTestCase
 
     fill_in "Book", with: @order.book_id
     fill_in "Quantity of book order", with: @order.quantity_of_book_order
+    fill_in "Seller", with: @order.seller_id
     fill_in "Status", with: @order.status
     fill_in "User", with: @order.user_id
     click_on "Create Order"
@@ -30,6 +31,7 @@ class OrdersTest < ApplicationSystemTestCase
 
     fill_in "Book", with: @order.book_id
     fill_in "Quantity of book order", with: @order.quantity_of_book_order
+    fill_in "Seller", with: @order.seller_id
     fill_in "Status", with: @order.status
     fill_in "User", with: @order.user_id
     click_on "Update Order"

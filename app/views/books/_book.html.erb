@@ -7,18 +7,18 @@
 
   <p>
     <strong>Book Image:</strong>
-    <%= image_tag book.book_image if book.book_image.attached? %>
+    <%= book.book_image%>
   </p>
   
 
   <p>
     <strong>Author:</strong>
-    <%= book.author_id %>
+    <%= book.author.name %>
   </p>
 
   <p>
     <strong>Seller:</strong>
-    <%= book.seller_id %>
+    <%= book.seller.name %>
   </p>
 
   <p>

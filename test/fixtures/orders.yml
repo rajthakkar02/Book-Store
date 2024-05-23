@@ -3,11 +3,13 @@
 one:
   user: one
   book: one
+  seller: one
   quantity_of_book_order: 1
   status: 1
 
 two:
   user: two
   book: two
+  seller: two
   quantity_of_book_order: 1
   status: 1

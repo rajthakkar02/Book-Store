@@ -12,13 +12,18 @@
   <% end %>
 
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
+    <% user_value = current_user.id %>
+    <%= form.hidden_field :user_id , value:user_value%>
   </div>
 
   <div>
     <%= form.label :book_id, style: "display: block" %>
-    <%= form.text_field :book_id %>
+    <%= form.collection_select :book_id , Book.all , :id , :book_name %>
+  </div>
+
+  <div>
+    <%= form.label :seller_id, style: "display: block" %>
+    <%= form.collection_select :seller_id , Seller.all , :id , :name %>
   </div>
 
   <div>
@@ -28,7 +33,7 @@
 
   <div>
     <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
+    <%= form.select :status, options_for_select([['Order Placed', 'Order_Placed'], ["Shipped","Shipped"],["Delivered","Delivered"]]) %>
   </div>
 
   <div>

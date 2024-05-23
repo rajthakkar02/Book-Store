@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_21_120204) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_22_134113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -91,11 +91,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_120204) do
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "book_id", null: false
+    t.bigint "seller_id", null: false
     t.integer "quantity_of_book_order"
-    t.integer "status", default: 0
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_orders_on_book_id"
+    t.index ["seller_id"], name: "index_orders_on_seller_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -116,6 +118,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_120204) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "phone_no"
     t.boolean "seller"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -128,5 +132,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_120204) do
   add_foreign_key "books", "sellers"
   add_foreign_key "feedbacks", "users"
   add_foreign_key "orders", "books"
+  add_foreign_key "orders", "sellers"
   add_foreign_key "orders", "users"
 end
