@@ -1,2 +1,3 @@
-json.extract! book, :id, :book_name, :author_id, :seller_id, :price, :quantity, :created_at, :updated_at
+json.extract! book, :id, :author_id, :seller_id, :book_name, :image, :price, :quantity, :created_at, :updated_at
 json.url book_url(book, format: :json)
+json.image url_for(book.image)
