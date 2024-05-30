@@ -5,6 +5,7 @@ ActiveAdmin.register Seller do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
+
   permit_params :name, :email, :phone_no, :address
   #
   # or

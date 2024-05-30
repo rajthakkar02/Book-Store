@@ -32,8 +32,12 @@
   </div>
 
   <div>
+    <% if current_user.seller? %>
     <%= form.label :status, style: "display: block" %>
     <%= form.select :status, options_for_select([['Order Placed', 'Order_Placed'], ["Shipped","Shipped"],["Delivered","Delivered"]]) %>
+    <% else %>
+    <%= form.hidden_field :status , value:"Order_Placed" %>
+    <% end %>
   </div>
 
   <div>

@@ -1,24 +1,21 @@
 <div id="<%= dom_id order %>">
   <p>
     <strong>User:</strong>
-    <%= order.user_id %>
+    <%= order.user.name %>
   </p>
-
   <p>
     <strong>Book:</strong>
     <%= order.book.book_name %>
   </p>
-
   <p>
     <strong>Seller:</strong>
     <%= order.seller.name %>
   </p>
-
   <p>
     <strong>Quantity of book order:</strong>
     <%= order.quantity_of_book_order %>
   </p>
-
+  
   <p>
     <strong>Status:</strong>
     <%= order.status %>

@@ -4,13 +4,24 @@ ActiveAdmin.register Order do
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # Uncomment all parameters which should be permitted for assignment
-  #
+  
+  form do |f|
+    f.inputs "User" do
+      f.input :user_id, as: :select, collection: User.all.map { |user| [user.name, user.id] }
+      f.input :book_id , as: :select, collection: Book.all.map { |book| [book.book_name, book.id] }
+      f.input :seller_id , as: :select, collection: Seller.all.map { |seller| [seller.name, seller.id] }
+      f.input :quantity_of_book_order
+      f.input :status
+    end
+    f.actions
+  end
+
   permit_params :user_id, :book_id, :seller_id, :quantity_of_book_order, :status
   #
   # or
   #
   # permit_params do
-  #   permitted = [:user_id, :book_id, :seller_id, :quantity_of_book_order, :status]
+  #   permitted = [:user_id, :book_id, :seller_id, :quantity_of_book_order, :status, :author_id]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end

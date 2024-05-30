@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   validates :phone_no, presence: true, uniqueness: true, length: { is: 10, message: "%{count} digit is the maximum allowed" }
   validates :name, presence: true
+  has_many :books
+  # belongs_to :seller  
 
   after_save :assign_admin_if_seller_matches
 

@@ -1,0 +1,23 @@
+<!-- app/views/carts/show.html.erb -->
+<h1>Your Cart</h1>
+<ul>
+  <% total_cart_value = 0%>
+  <% @cart.cart_items.each do |item| %>
+    <li>
+      <h2><%= item.book.book_name %></h2>
+      <p>Quantity: <%= item.quantity %></p>
+      <p>Price: ₹<%= item.book.price %>
+        <%= button_to "Destroy this book", item, method: :delete %>
+        <br>
+        <%= button_to "Increase Quantity", increase_cart_path(cart_item_id: item.id ) , method: :patch %>
+        <br>
+        <%= button_to "Decrese Quantity" ,  decrease_cart_path(cart_item_id: item.id) , method: :patch%>
+        <% total_cart_value = total_cart_value + (item.quantity * item.book.price) %>
+      </li>
+    <% end %>
+    <br>
+    <p><strong>Cart Value : <strong>₹<%= total_cart_value%></p>
+      </ul>
+      <%= button_to "Order" %>
+      <br>
+      <%= link_to 'Continue Shopping', root_path %>

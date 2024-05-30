@@ -1,6 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @author %>
+  <p>
+    <strong>Total Revenue:</strong>
+    <%= number_to_currency(@total_revenue) %>
+  </p>
+
 
 <div>
   <%= link_to "Edit this author", edit_author_path(@author) %> |
