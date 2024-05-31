@@ -6,7 +6,7 @@ ActiveAdmin.register Book do
   # Uncomment all parameters which should be permitted for assignment
   #
   remove_filter :image_attachment, :image_blob, :cpics_attachments, :cpics_blobs
-  permit_params :author_id, :seller_id,  :book_name, :price, :quantity
+  permit_params :author_id, :seller_id,  :book_name, :price, :quantity, :description
   #
   # or
   #

@@ -1,9 +1,5 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
-  #before_action :set_seller, only: %i[ show edit update destroy ]
-  # after_action :set_book, only: %i[ create show edit update destroy ]
-
-
 
   # GET /orders or /orders.json
   def index
@@ -29,18 +25,21 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    @order = Order.new(order_params)
-    
-
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to order_url(@order), notice: "Order was successfully created." }
-        format.json { render :show, status: :created, location: @order }
-      else
-        flash.now[:alert] = "Quantity is greater than the available stock"
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+    @cart = current_cart
+    if @cart.cart_items.empty?
+      redirect_to root_path, notice: "Your Cart is empty"
+    else
+      @cart.cart_items.each do |cart_item|
+        Order.create(
+          user: current_user,
+          book: cart_item.book,
+          seller: cart_item.book.seller,
+          quantity_of_book_order: cart_item.quantity,
+          status: 0, # Assuming 0 means a new order
+        )
       end
+      session[:cart_id] = nil # Clear the cart after order is placed
+      redirect_to root_path, notice: "Order placed successfully."
     end
   end
 
@@ -67,20 +66,18 @@ class OrdersController < ApplicationController
     end
   end
 
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
+
+  def current_cart
+    Cart.find_or_create_by(id: session[:cart_id]).tap do |cart|
+      session[:cart_id] = cart.id
+    end
+  end
+
   def set_order
     @order = Order.find(params[:id])
-  end
-
-  def set_book
-    @book = Book.find(params[id: @order.book_id])
-  end
-
-  def set_author
-    @author = Author.find(params[:author_id])
   end
 
   # Only allow a list of trusted parameters through.

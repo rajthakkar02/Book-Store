@@ -40,15 +40,16 @@
     <br>
     <div>
       <%= f.label :author_name_cont, "Filter by Author:" %>
-      <%= f.search_field :author_name_cont %>
+      <%= f.select :author_name_cont , Author.all.map {|author| [author.name]}, include_blank: 'Select Author' %>
     </div>
     <br>
     <div>
       <%= f.label :seller_name_cont, "Filter by Seller:" %>
-      <%= f.search_field :seller_name_cont %>
+      <%= f.select :seller_name_cont , Seller.all.map {|seller| [seller.name]}, include_blank: 'Select Seller' %>
     </div>
     <br>
     <%= f.submit "Search" %>
+    <%= link_to "Clear Search", request.path, class:"cancel-button" %>
   <% end %>
   <br>
   <br>

@@ -18,6 +18,6 @@
     <br>
     <p><strong>Cart Value : <strong>₹<%= total_cart_value%></p>
       </ul>
-      <%= button_to "Order" %>
+      <%= button_to "Order" , orders_path , method: :post%>
       <br>
       <%= link_to 'Continue Shopping', root_path %>

@@ -42,6 +42,11 @@
   </div>
 
   <div>
+    <%= form.label :description , style: "display: block" %>
+    <%= form.text_area(:description, rows: 15,column: 15, data: {provide: "markdown"})%>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
