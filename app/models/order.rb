@@ -14,11 +14,11 @@ class Order < ApplicationRecord
   end
 
   def self.bookings_by_week
-    group_by_week(:created_at, format: "%Y-%m-%d").sum(:quantity_of_book_order)
+    group_by_week(:created_at).sum(:quantity_of_book_order)
   end
 
   def self.bookings_by_month
-    group_by_month(:created_at, format: "%Y-%m").sum(:quantity_of_book_order)
+    group_by_month(:created_at).sum(:quantity_of_book_order)
   end
 
   after_create :decrease_book_stock

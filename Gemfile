@@ -25,8 +25,6 @@ gem 'devise', '~> 4.9', '>= 4.9.2'
 
 gem 'sass-rails', '~> 6.0'
 
-gem 'chartkick', '~> 5.0', '>= 5.0.7'
-
 gem 'groupdate'
 
 # Use the Puma web server [https://github.com/puma/puma]
@@ -83,3 +81,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "chartkick", "~> 5.0"

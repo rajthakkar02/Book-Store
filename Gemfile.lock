@@ -348,7 +348,7 @@ DEPENDENCIES
   bootsnap
   bootstrap (~> 5.2, >= 5.2.3)
   capybara
-  chartkick (~> 5.0, >= 5.0.7)
+  chartkick (~> 5.0)
   debug
   devise (~> 4.9, >= 4.9.2)
   groupdate

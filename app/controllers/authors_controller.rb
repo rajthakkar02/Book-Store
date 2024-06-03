@@ -10,13 +10,12 @@ class AuthorsController < ApplicationController
   def show
     @total_revenue = @author.total_revenue
 
-    # total = 0
-    # @author.books.each do |book|
-    #   book.orders.each do |order|
-    #     total += order.quantity_of_book_order * book.price
-    #   end
-    # end
-    # Rails.logger.debug "Manual total revenue: #{total}"
+    total = 0
+    @author.books.each do |book|
+      book.orders.each do |order|
+        total += order.quantity_of_book_order * book.price
+      end
+    end
   end
 
   # GET /authors/new
