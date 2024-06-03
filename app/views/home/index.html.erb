@@ -62,7 +62,7 @@
       <p><%= book.author.name %></p>
       <p><%= book.seller.name %></p>
       <p>Price: ₹<%= book.price%>
-        <%= button_to "Add Cart" , add_to_cart_path(book_id: book.id), method: :post%>
+        <%= button_to "Add Cart" , add_to_cart_path(book_id: book.id), method: :post , id: "add-cart"%>
         <br>
         <%= button_to "Show Details",  book , method: :get %>
         <br>
