@@ -17,7 +17,6 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs "User" do
-      f.input :id
       f.input :name
       f.input :phone_no
       f.input :email
