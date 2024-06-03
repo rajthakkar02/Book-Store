@@ -1,0 +1,16 @@
+Order Confirmation
+
+Thank you for your order. Here are the details:
+
+
+<% @cart_items.each do |item| %>
+    Book Title: <%= item.book.book_name %>
+    Quantity: <%= item.quantity %>
+    Price per Item: <%= number_to_currency(item.book.price) %>
+    Subtotal: <%= number_to_currency(item.book.price * item.quantity) %>
+<% end %>
+
+
+Total Cart Value: <%= number_to_currency(@total_value) %>
+
+If you have any questions, please contact us.

@@ -29,16 +29,22 @@ class OrdersController < ApplicationController
     if @cart.cart_items.empty?
       redirect_to root_path, notice: "Your Cart is empty"
     else
+      orders = []
+
+      total_value = @cart.cart_items.sum { |item| item.book.price * item.quantity }
+
       @cart.cart_items.each do |cart_item|
-        Order.create(
+        order = Order.create(
           user: current_user,
           book: cart_item.book,
           seller: cart_item.book.seller,
           quantity_of_book_order: cart_item.quantity,
           status: 0, # Assuming 0 means a new order
         )
+        orders << order
       end
-      session[:cart_id] = nil # Clear the cart after order is placed
+      OrderMailer.confirmation_email(current_user, @cart.cart_items, total_value).deliver_now      
+      session[:cart_id] = nil
       redirect_to root_path, notice: "Order placed successfully."
     end
   end

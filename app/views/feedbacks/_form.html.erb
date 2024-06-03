@@ -12,18 +12,23 @@
   <% end %>
 
   <div>
+    <%= form.hidden_field :user_id , value:current_user.id %>
+  </div>
+
+  <div>
     <%= form.label :comment, style: "display: block" %>
     <%= form.text_area :comment %>
   </div>
 
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
 
   <div>
     <%= form.label :commentable_id, style: "display: block" %>
     <%= form.text_field :commentable_id %>
+  </div>
+
+  <div>
+    <%= form.label :commentable_type, style: "display: block"%>
+    <%= form.select :commentable_type, options_for_select(["Book","Author"]) %>
   </div>
 
   <div>

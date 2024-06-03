@@ -1,8 +1,5 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
-  # before_action :set_seller, only: %i[ show edit update destroy ]
-  # before_action :authenticate_user! # Assuming you have a method to authenticate users
-  # before_action :authenticate_seller!, only: %i[edit update destroy]
 
   # GET /books or /books.json
   def index
@@ -79,20 +76,4 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:author_id, :seller_id, :image,:description, :book_name, :price, :quantity)
   end
-
-  # def current_seller
-  #   @current_seller ||= Seller.find(session[:seller_id]) if session[:seller_id]
-  # end
-
-  # def current_user
-  #    @current_user = !current_user.seller # Assume you have a method to get the current customer
-  # end
-
-  # def authenticate_user!
-  #   redirect_to new_session_path unless current_user
-  # end
-
-  # def authenticate_seller!
-  #   redirect_to new_session_path unless current_seller
-  # end
 end
