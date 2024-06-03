@@ -1,9 +1,10 @@
 class AuthorsController < ApplicationController
   before_action :set_author, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /authors or /authors.json
   def index
-    @authors = Author.all
+    @authors = Author.where(seller_id: current_user.id) if current_user.seller?
   end
 
   # GET /authors/1 or /authors/1.json
@@ -30,7 +31,6 @@ class AuthorsController < ApplicationController
   # POST /authors or /authors.json
   def create
     @author = Author.new(author_params)
-
     respond_to do |format|
       if @author.save
         format.html { redirect_to author_url(@author), notice: "Author was successfully created." }
