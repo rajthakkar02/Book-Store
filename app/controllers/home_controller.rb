@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
   def index
     if current_user.seller?
-      @authors = Author.all.map do |author|
+      @authors = Author.where(seller_id: current_user.id).map do |author|
         {
           name: author.name,
           total_bookings_week: author.total_bookings_current_week,

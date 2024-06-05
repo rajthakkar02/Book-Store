@@ -1,7 +1,9 @@
 class Author < ApplicationRecord
   belongs_to :seller
   has_many :orders
-  has_many :books
+  has_many :books , dependent: :destroy
+  validates :name , presence: true
+  validates :email , presence:true
 
   def total_revenue
     revenue = books.joins(:orders).sum("orders.quantity_of_book_order * books.price")
