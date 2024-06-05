@@ -7,7 +7,20 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick"%>
+    <style>
+      .notice {
+        background-color: #b9f6ca;
+        color: #004d40;
+      }
+      .alert {
+        background-color: #ff8a80;
+        color: #b71c1c;
+      }
+    </style>
   </head>
   <body>
     <p class="notice"><%= notice %></p>

@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   resources :cart_items
-resource :cart, only: %i[ show destroy create] do
+  resource :cart, only: %i[ show destroy create ] do
     post "add/:book_id", to: "carts#add", as: "add_to"
-    post '/orders', to: 'orders#create'
+    post "/orders", to: "orders#create"
     delete "destroy/:cart_id", to: "cart_items#destroy"
     patch "increase/:cart_item_id", to: "carts#increase", as: "increase"
     patch "decrease/:cart_item_id", to: "carts#decrease", as: "decrease"
   end
   resources :books do
-    resources :feedbacks , module: :books
-    get "books/:book_id" , to: "books#show"
+    resources :feedbacks, module: :books
+    get "books/:book_id", to: "books#show"
   end
   resources :orders
   resources :authors

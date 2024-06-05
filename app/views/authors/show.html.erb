@@ -2,19 +2,10 @@
 <%= render @author %>
 <p>
   <strong>Total Revenue:</strong>
-  <%= number_to_currency(@total_revenue,unit: "Rs ") %>
+  <%= number_to_currency(@total_revenue,unit:"Rs ") %>
 </p>
-<h2>Feedbacks</h2>
-<% if @author.feedbacks.any? %>
-  <%= render partial: "feedbacks/feedback", collection: @author.feedbacks %>
-<% else %>
-  <p>No feedbacks yet.</p>
-<% end %>
-<h2>Leave a Feedback</h2>
-<%= render "feedbacks/form", commentable: @author, feedback: @feedback %>
 <div>
-  <div>
-    <%= link_to "Edit this author", edit_author_path(@author) %> |
-    <%= link_to "Back to authors", authors_path %>
-    <%= button_to "Destroy this author", @author, method: :delete %>
-  </div>
+  <%= link_to "Edit this author", edit_author_path(@author) %> |
+  <%= link_to "Back to authors", authors_path %>
+  <%= button_to "Destroy this author", @author, method: :delete %>
+</div>

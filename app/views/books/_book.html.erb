@@ -1,5 +1,14 @@
 <div id="<%= dom_id book %>">
   <p>
+    <%= image_tag(url_for(book.image.variant(:display))) if book.image.attached? %>
+  </p>
+
+  <p>
+    <strong>Book name:</strong>
+    <%= book.book_name %>
+  </p>
+
+  <p>
     <strong>Author:</strong>
     <%= book.author.name %>
   </p>
@@ -10,24 +19,16 @@
   </p>
 
   <p>
-    <strong>Book name:</strong>
-    <%= book.book_name %>
+    <strong>Price: </strong>
+    Rs <%= book.price %>
   </p>
 
-  <p>
-    <strong>Image:</strong>
-    <%= image_tag(url_for(book.image.variant(:display))) if book.image.attached? %>
-  </p>
 
   <p>
     <strong>Description:</strong>
     <%= book.description %>
   </p>
 
-  <p>
-    <strong>Price:</strong>
-    <%= book.price %>
-  </p>
 
   <p>
   <% if current_user.seller?%>

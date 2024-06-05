@@ -2,7 +2,6 @@ class Author < ApplicationRecord
   belongs_to :seller
   has_many :orders
   has_many :books
-  has_many :feedbacks , as: :commentable
 
   def total_revenue
     revenue = books.joins(:orders).sum("orders.quantity_of_book_order * books.price")

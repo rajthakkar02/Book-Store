@@ -1,9 +1,18 @@
-<% if user_signed_in? && current_user.seller?%>
-  <h1>Welcome Seller, <%= current_user.name   %></h1>
-  <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
+<h1>Books Store</h1>
+<% if user_signed_in? && current_user.seller? %>
+  <nav style="display: flex; justify-content: space-between; align-items: center; background-color: #333; padding: 10px;">
+    <h2 style="margin-top: 20px; color: white">Welcome Seller, <%= current_user.name %></h2>
+    <div>
+      <%= button_to 'Sign out', destroy_user_session_path, method: :delete, style: "margin-right: 10px; padding: 10px 20px; background-color: #b00; color: white; border: none; border-radius: 5px;" %>
+      <br>
+      <%= link_to 'Add Author', authors_path, method: :get, style: "margin-bottom: 10px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; text-align: center;" %>
+      <%= link_to 'Add Book', books_path, method: :get, style: "margin-bottom: 10px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; text-align: center;" %>
+      <%= link_to 'Ordered Book', orders_path, method: :get, style: " margin-bottom: 10px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; text-align: center;" %>
+    </div>
+  </nav>
   <% Author.where(seller_id: current_user.id).each do |author| %>
-    <h2><%= author[:name] %></h2>
-    <div id="chart-<%= author[:name].parameterize %>" style="height: 300px;">
+    <h2 style="margin-left: 20px; font-weight: bold;"><%= author[:name] %></h2>
+    <div id="chart-<%= author[:name].parameterize %>" style="height: 300px; margin-bottom: 20px;">
       <%= bar_chart [
         ["Current Week", author.total_bookings_current_week],
         ["Current Month", author.total_bookings_current_month],
@@ -11,68 +20,68 @@
       ], colors: ["#b00", "#666"] %>
     </div>
   <% end %>
-  <h2>Total Bookings by Week</h2>
-  <div id="chart-week" style="height: 300px;">
+  <h2 style="margin-left: 20px; font-weight: bold;">Total Bookings by Week</h2>
+  <div id="chart-week">
     <%= line_chart @bookings_by_week, xtitle: "Week", ytitle: "Bookings" %>
   </div>
-  <h2>Total Bookings by Month</h2>
-  <div id="chart-month" style="height: 300px;">
+  <h2 style="margin-left: 20px; font-weight: bold;">Total Bookings by Month</h2>
+  <div id="chart-month">
     <%= line_chart @bookings_by_month, xtitle: "Month", ytitle: "Bookings" %>
   </div>
-  <h2>Popular Order</h2>
-  <div id="pie-chart-oreder" style="height: 300px;">
+  <h2 style="margin-left: 20px; font-weight: bold;">Popular Order</h2>
+  <div id="pie-chart-oreder">
     <%= pie_chart @popular_book %>
   </div>
-  <%= link_to 'Add Author', authors_path , method: :get%>
-  <br>
-  <%= link_to 'Add Book' , books_path , method: :get%>
-  <br>
-  <%= link_to 'Ordered Book' , orders_path , method: :get%>
-<% elsif user_signed_in? && !current_user.seller %>
-  <h1>Welcome Home, <%= current_user.name %></h1>
-  <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
-  <br>
-  <%= button_to "Order Histroy" , orders_path , method: :get %>
-  <br>
-  <%= button_to "Cart" ,cart_path , method: :get %>
+<% elsif user_signed_in? && !current_user.seller? %>
+  <nav style="display: flex; justify-content: space-between; align-items: center; background-color: #333; padding: 10px;">
+    <h2 style="color: white;">Welcome Home, <%= current_user.name %></h2>
+    <div>
+      <%= button_to 'Sign out', destroy_user_session_path, method: :delete, style: "margin-right: 10px; padding: 10px 20px; background-color: #b00; color: white; border: none; border-radius: 5px;" %>
+      <br>
+      <%= button_to "Order History", orders_path, method: :get, style: "margin-right: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
+      <br>
+      <%= button_to "Cart", cart_path, method: :get, style: "padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
+    </div>
+  </nav>
   <br>
   <%= search_form_for @q, url: root_path, method: :get do |f| %>
-    <div>
-      <%= f.label :book_name_cont, "Search for books:" %>
-      <%= f.search_field :book_name_cont %>
+    <div style="margin-bottom: 10px;">
+      <%= f.label :book_name_cont, "Search for books:", style: "margin-right: 10px;" %>
+      <%= f.search_field :book_name_cont, style: "padding: 5px; border-radius: 5px; border: 1px solid #ccc;" %>
     </div>
-    <br>
-    <div>
-      <%= f.label :author_name_cont, "Filter by Author:" %>
-      <%= f.select :author_name_cont , Author.all.map {|author| [author.name]}, include_blank: 'Select Author' %>
+    <div style="margin-bottom: 10px;">
+      <%= f.label :author_name_cont, "Filter by Author:", style: "margin-right: 10px;" %>
+      <%= f.select :author_name_cont, Author.all.map { |author| [author.name] }, include_blank: 'Select Author', style: "padding: 5px; border-radius: 5px; border: 1px solid #ccc;" %>
     </div>
-    <br>
-    <div>
-      <%= f.label :seller_name_cont, "Filter by Seller:" %>
-      <%= f.select :seller_name_cont , Seller.all.map {|seller| [seller.name]}, include_blank: 'Select Seller' %>
+    <div style="margin-bottom: 10px;">
+      <%= f.label :seller_name_cont, "Filter by Seller:", style: "margin-right: 10px;" %>
+      <%= f.select :seller_name_cont, Seller.all.map { |seller| [seller.name] }, include_blank: 'Select Seller', style: "padding: 5px; border-radius: 5px; border: 1px solid #ccc;" %>
     </div>
-    <br>
-    <%= f.submit "Search" %>
-    <%= link_to "Clear Search", request.path, class:"cancel-button" %>
+    <%= f.submit "Search", style: "padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
+    <%= link_to "Clear Search", request.path, class: "cancel-button", style: "padding: 10px 20px; background-color: #b00; color: white; border: none; border-radius: 5px; text-decoration: none; margin-left: 10px;" %>
   <% end %>
   <br>
   <br>
-  <% @books.all.each do |book| %>
-    <% if book.quantity > 0 %>
-      <% if book.image.attached? %>
-        <img src="<%= url_for(book.image) %>" alt="<%= book.book_name %> cover" style="width:150px;height:auto;">
-      <% end %>
-      <h2><strong><%= book.book_name %></strong></h2>
-      <p><%= book.author.name %></p>
-      <p><%= book.seller.name %></p>
-      <p>Price: ₹<%= book.price%>
-        <%= button_to "Add Cart" , add_to_cart_path(book_id: book.id), method: :post , id: "add-cart"%>
-        <br>
-        <%= button_to "Show Details",  book , method: :get %>
-        <br>
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap;  justify-content: space-evenly;">
+    <% @books.all.each do |book| %>
+      <% if book.quantity > 0 %>
+        <div style="border: 1px solid #ccc; padding: 20px; width: 300px; text-align: center;">
+          <% if book.image.attached? %>
+            <img src="<%= url_for(book.image) %>" alt="<%= book.book_name %> cover" style="width: 150px; height: auto; margin-bottom: 10px;">
+          <% end %>
+          <h2><strong><%= book.book_name %></strong></h2>
+          <p><%= book.author.name %></p>
+          <p><%= book.seller.name %></p>
+          <p>Price: ₹<%= book.price %></p>
+          <%= button_to "Add to Cart", add_to_cart_path(book_id: book.id), method: :post, id: "add-cart", style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
+          <br>
+          <%= button_to "Show Details", book, method: :get, style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
+          <br>
+        </div>
       <% end %>
     <% end %>
-  <% else %>
-    <h1>Home</h1>
-    <%= button_to 'Sign in', new_user_session_path %>
-  <% end %>
+  </div>
+<% else %>
+  <h1>Home</h1>
+  <%= button_to 'Sign in', new_user_session_path, style: "margin-bottom: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
+<% end %>
