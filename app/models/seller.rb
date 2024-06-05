@@ -12,6 +12,6 @@ class Seller < ApplicationRecord
   private
 
   def set_seller_id
-    self.seller_id = self.user_id if self.user_id.present?
+    self.seller_id = self.user_id if self.user_ids.present?
   end
 end

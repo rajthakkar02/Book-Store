@@ -16,8 +16,9 @@ class User < ApplicationRecord
   def assign_admin_if_seller_matches
     # Adjust the fields used for matching as necessary (e.g., email, name)
     seller = Seller.find_by(email: self.email)
+    seller_no = Seller.find_by(phone_no: self.phone_no)
 
-    if seller
+    if seller && seller_no
       update_column(:seller, true) unless self.seller?
     end
   end
