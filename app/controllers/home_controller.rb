@@ -12,6 +12,7 @@ class HomeController < ApplicationController
         }
         @bookings_by_week = Order.bookings_by_week
         @bookings_by_month = Order.bookings_by_month
+        @popular_book = Order.where(seller_id: current_user.id).popular_book
       end
     else
       @books = Book.all

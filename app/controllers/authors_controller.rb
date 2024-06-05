@@ -4,7 +4,11 @@ class AuthorsController < ApplicationController
 
   # GET /authors or /authors.json
   def index
-    @authors = Author.where(seller_id: current_user.id) if current_user.seller?
+    if current_user.seller?
+      @authors = Author.where(seller_id: current_user.id)
+    else
+      @author = Author.all
+    end
   end
 
   # GET /authors/1 or /authors/1.json

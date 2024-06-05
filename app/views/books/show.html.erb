@@ -1,10 +1,18 @@
 <p style="color: green"><%= notice %></p>
-
 <%= render @book %>
-
+<%if !current_user.seller? %>
+<h2>Feedbacks</h2>
+<% if @book.feedbacks.any? %>
+  <%= render partial: "feedbacks/feedback", collection: @book.feedbacks %>
+<% else %>
+  <p>No feedbacks yet.</p>
+<% end %>
+<h2>Leave a Feedback</h2>
+<%= render "feedbacks/form", commentable: @book, feedback: @feedback %>
+<%end%>
 <div>
+  <%= link_to "Dashboard", root_path if !current_user.seller? %>
   <%= link_to "Edit this book", edit_book_path(@book) if current_user.seller? %> |
   <%= link_to "Back to books", books_path if current_user.seller? %>
-
   <%= button_to "Destroy this book", @book, method: :delete if current_user.seller? %>
 </div>

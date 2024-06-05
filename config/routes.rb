@@ -7,9 +7,11 @@ resource :cart, only: %i[ show destroy create] do
     patch "increase/:cart_item_id", to: "carts#increase", as: "increase"
     patch "decrease/:cart_item_id", to: "carts#decrease", as: "decrease"
   end
-  resources :books
+  resources :books do
+    resources :feedbacks , module: :books
+    get "books/:book_id" , to: "books#show"
+  end
   resources :orders
-  resources :feedbacks
   resources :authors
   devise_for :users
   ActiveAdmin.routes(self)

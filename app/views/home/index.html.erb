@@ -1,13 +1,13 @@
 <% if user_signed_in? && current_user.seller?%>
   <h1>Welcome Seller, <%= current_user.name   %></h1>
   <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
-  <% Author.all.each do |author| %>
+  <% Author.where(seller_id: current_user.id).each do |author| %>
     <h2><%= author[:name] %></h2>
     <div id="chart-<%= author[:name].parameterize %>" style="height: 300px;">
       <%= bar_chart [
-        ["Current Week", author[:total_bookings_week]],
-        ["Current Month", author[:total_bookings_month]],
-        ["Current Year", author[:total_bookings_year]]
+        ["Current Week", author.total_bookings_current_week],
+        ["Current Month", author.total_bookings_current_month],
+        ["Current Year", author.total_bookings_current_year]
       ], colors: ["#b00", "#666"] %>
     </div>
   <% end %>
@@ -18,6 +18,10 @@
   <h2>Total Bookings by Month</h2>
   <div id="chart-month" style="height: 300px;">
     <%= line_chart @bookings_by_month, xtitle: "Month", ytitle: "Bookings" %>
+  </div>
+  <h2>Popular Order</h2>
+  <div id="pie-chart-oreder" style="height: 300px;">
+    <%= pie_chart @popular_book %>
   </div>
   <%= link_to 'Add Author', authors_path , method: :get%>
   <br>
@@ -60,6 +64,7 @@
       <% end %>
       <h2><strong><%= book.book_name %></strong></h2>
       <p><%= book.author.name %></p>
+      <span><%= link_to "Author Feedback" , author_path(book.author) , method: :get %></span>
       <p><%= book.seller.name %></p>
       <p>Price: ₹<%= book.price%>
         <%= button_to "Add Cart" , add_to_cart_path(book_id: book.id), method: :post , id: "add-cart"%>

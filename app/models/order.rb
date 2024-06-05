@@ -21,6 +21,10 @@ class Order < ApplicationRecord
     group_by_month(:created_at).sum(:quantity_of_book_order)
   end
 
+  def self.popular_book
+    joins(:book).group('books.book_name').sum(:quantity_of_book_order)
+  end
+
   after_create :decrease_book_stock
   after_destroy :increase_book_stock
 

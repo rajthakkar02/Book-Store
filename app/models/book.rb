@@ -8,7 +8,7 @@ class Book < ApplicationRecord
   validates :image, content_type: { in: %w[image/jpeg image/gif image/png], message: "must be a valid image format" }, size: { less_than: 5.megabytes, message: "should be less than 5MB" }
   validates :quantity, numericality: { greater_than_or_equal_to: 0 }
   validates :price, numericality: { greater_than_or_equal_to: 1 }
-  has_many :feedbacks, as: :commentable
+  has_many :feedbacks, as: :commentable , dependent: :destroy
   has_many :orders
   has_many :cart_items
   has_many :carts, through: :cart_items
