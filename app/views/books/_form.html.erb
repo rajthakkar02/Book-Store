@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :author_id, style: "display: block" %>
-    <%= form.collection_select :author_id, Author.where(seller_id: current_user.id) , :id , :name %>
+    <%= form.collection_select :author_id, Author.where(seller_id: current_user.seller_id) , :id , :name %>
   </div>
 
   <div>

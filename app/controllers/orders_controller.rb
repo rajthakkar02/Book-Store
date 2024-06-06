@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     if current_user.seller?
-      @orders = Order.where(seller_id: current_user.id)
+      @orders = Order.where(seller_id: current_user.seller_id)
     else
       @orders = Order.all
     end
@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
         )
         orders << order
       end
-      OrderMailer.confirmation_email(current_user, @cart.cart_items, total_value).deliver_now      
+      OrderMailer.confirmation_email(current_user, @cart.cart_items, total_value).deliver_now
       session[:cart_id] = nil
       redirect_to root_path, notice: "Order placed successfully."
     end

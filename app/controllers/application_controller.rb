@@ -9,14 +9,6 @@ class ApplicationController < ActionController::Base
     self.class < ActiveAdmin::BaseController
   end
 
-  # def after_sign_in_path_for(resource)
-  #   if resource.seller?
-  #     seller_root_path
-  #   else
-  #     root_path
-  #   end
-  # end
-
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?

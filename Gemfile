@@ -11,20 +11,21 @@ gem "sprockets-rails"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
+gem "letter_opener", "~> 1.4", ">= 1.4.1"
 
-gem 'activeadmin'
+gem "activeadmin"
 
-gem 'bcrypt'
+gem "bcrypt"
 
-gem 'active_storage_validations', '~> 1.0', '>= 1.0.4'
+gem "active_storage_validations", "~> 1.0", ">= 1.0.4"
 
-gem 'ransack', '~> 4.1', '>= 4.1.1'
+gem "ransack", "~> 4.1", ">= 4.1.1"
 
-gem 'devise', '~> 4.9', '>= 4.9.2'
+gem "devise", "~> 4.9", ">= 4.9.2"
 
-gem 'sass-rails', '~> 6.0'
+gem "sass-rails", "~> 6.0"
 
-gem 'groupdate'
+gem "groupdate"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"

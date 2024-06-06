@@ -5,7 +5,7 @@ class AuthorsController < ApplicationController
   # GET /authors or /authors.json
   def index
     if current_user.seller?
-      @authors = Author.where(seller_id: current_user.id)
+      @authors = Author.where(seller_id: current_user.seller_id)
     else
       @author = Author.all
     end

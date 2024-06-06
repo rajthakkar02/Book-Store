@@ -3,16 +3,16 @@ class HomeController < ApplicationController
 
   def index
     if current_user.seller?
-      @authors = Author.where(seller_id: current_user.id).map do |author|
+      @authors = Author.where(seller_id: current_user.seller_id).map do |author|
         {
           name: author.name,
           total_bookings_week: author.total_bookings_current_week,
           total_bookings_month: author.total_bookings_current_month,
           total_bookings_year: author.total_bookings_current_year,
         }
-        @bookings_by_week = Order.where(seller_id: current_user.id).bookings_by_week
-        @bookings_by_month = Order.where(seller_id: current_user.id).bookings_by_month
-        @popular_book = Order.where(seller_id: current_user.id).popular_book
+        @bookings_by_week = Order.where(seller_id: current_user.seller_id).bookings_by_week
+        @bookings_by_month = Order.where(seller_id: current_user.seller_id).bookings_by_month
+        @popular_book = Order.where(seller_id: current_user.seller_id).popular_book
       end
     else
       @books = Book.all

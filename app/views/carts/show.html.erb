@@ -9,7 +9,7 @@
       <p>Quantity: <%= item.quantity %></p>
       <p>Price: ₹<%= item.book.price %></p>
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <%= button_to "Destroy this book", item, method: :delete, style: "padding: 10px 20px; background-color: #b00; color: white; border: none; border-radius: 5px;" %>
+        <%= button_to "Remove from cart", item, method: :delete, style: "padding: 10px 20px; background-color: #b00; color: white; border: none; border-radius: 5px;" %>
         <%= button_to "Increase Quantity", increase_cart_path(cart_item_id: item.id), method: :patch, id: "increase-button", style: "padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
         <%= button_to "Decrease Quantity", decrease_cart_path(cart_item_id: item.id), method: :patch, style: "padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
       </div>
