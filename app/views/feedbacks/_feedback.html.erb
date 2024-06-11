@@ -1,8 +1,9 @@
-<div id="<%= dom_id feedback %>">
+<div id="<%= dom_id feedback %>" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background-color: #58b6f5;">
   <div>
-    <p><%= feedback.user.name %></p>
-    <div >
+    <p style="font-weight: bold; color: #333;"><%= feedback.user.name %></p>
+    <div style="padding-left: 10px; color: #555;">
       <%= feedback.comment %>
+      <%# <%= button_to "Delete",  [commentable, feedback], method: :destroy %> 
     </div>
   </div>
 </div>

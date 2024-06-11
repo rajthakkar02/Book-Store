@@ -10,10 +10,14 @@ Rails.application.routes.draw do
   resources :books do
     resources :feedbacks, module: :books
     get "books/:book_id", to: "books#show"
+    delete "books/:book_id/feedbacks/:id", to: "books/feedbacks#destroy"
   end
   resources :orders
   resources :authors
   devise_for :users
+
+  get "/register_seller", to: "users#new_seller"
+  post "/register_seller", to: "users#create_seller"
   ActiveAdmin.routes(self)
   # resources :sellers
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

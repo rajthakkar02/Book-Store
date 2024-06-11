@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   # GET /books or /books.json
   def index
     if current_user.seller?
-      @books = Book.where(seller_id: current_user.seller_id)
+      @books = Book.where(user_id: current_user.id)
     else
       @books = Book.all
     end
@@ -74,6 +74,6 @@ class BooksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def book_params
-    params.require(:book).permit(:author_id, :seller_id, :image,:description, :book_name, :price, :quantity)
+    params.require(:book).permit(:author_id, :user_id, :image,:description, :book_name, :price, :quantity)
   end
 end

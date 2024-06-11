@@ -2,7 +2,7 @@
 <%= render @author %>
 <p>
   <strong>Total Revenue:</strong>
-  <%= number_to_currency(@total_revenue,unit:"Rs ") %>
+  <%= number_to_currency(@total_revenue,unit:"₹ ") %>
 </p>
 <div>
   <%= link_to "Edit this author", edit_author_path(@author) %> |

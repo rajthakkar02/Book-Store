@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
   belongs_to :author
-  belongs_to :seller
+  belongs_to :user
   has_one_attached :image do |attachable|
     attachable.variant :display, resize_to_limit: [200, 400]
   end

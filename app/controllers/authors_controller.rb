@@ -5,7 +5,7 @@ class AuthorsController < ApplicationController
   # GET /authors or /authors.json
   def index
     if current_user.seller?
-      @authors = Author.where(seller_id: current_user.seller_id)
+      @authors = Author.where(user_id: current_user.id)
     else
       @author = Author.all
     end
@@ -78,6 +78,6 @@ class AuthorsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def author_params
-    params.require(:author).permit(:seller_id, :name, :email)
+    params.require(:author).permit(:user_id, :name, :email)
   end
 end

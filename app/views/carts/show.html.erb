@@ -7,7 +7,7 @@
     <li style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
       <h2><%= item.book.book_name %></h2>
       <p>Quantity: <%= item.quantity %></p>
-      <p>Price: ₹<%= item.book.price %></p>
+      <p>Price: ₹ <%= item.book.price %></p>
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
         <%= button_to "Remove from cart", item, method: :delete, style: "padding: 10px 20px; background-color: #b00; color: white; border: none; border-radius: 5px;" %>
         <%= button_to "Increase Quantity", increase_cart_path(cart_item_id: item.id), method: :patch, id: "increase-button", style: "padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
@@ -17,7 +17,7 @@
     </li>
   <% end %>
 </ul>
-<p style="font-size: 18px; font-weight: bold;">Cart Value: ₹<%= total_cart_value %></p>
+<p style="font-size: 18px; font-weight: bold;">Cart Value: ₹ <%= total_cart_value %></p>
 <div style="margin-top: 20px;">
   <%= button_to "Order", orders_path, method: :post, style: "padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px;" %>
   <br>

@@ -18,12 +18,12 @@
 
   <div>
     <%= form.label :book_id, style: "display: block" %>
-    <%= form.collection_select :book_id , Book.all , :id , :book_name %>
+    <%= form.collection_select :book_id , Book.where(user_id: current_user.id) , :id , :book_name %>
   </div>
 
   <div>
-    <%= form.label :seller_id, style: "display: block" %>
-    <%= form.collection_select :seller_id , Seller.all , :id , :name %>
+    <%= form.label :seller, style: "display: block" %>
+    <%= form.select :seller , User.where(seller: 1).collect { |x| [x.name , x.id] } %>
   </div>
 
   <div>

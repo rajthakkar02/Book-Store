@@ -15,14 +15,20 @@
 
   <p>
     <strong>Seller:</strong>
-    <%= book.seller.name %>
+    <%= book.user.name %>
   </p>
 
   <p>
     <strong>Price: </strong>
-    Rs <%= book.price %>
+    ₹ <%= book.price %>
   </p>
 
+  <p>
+  <% if current_user&.seller?%>
+    <strong>Quantity:</strong>
+    <%= book.quantity %>
+  <% end %>
+  </p>
 
   <p>
     <strong>Description:</strong>
@@ -30,11 +36,5 @@
   </p>
 
 
-  <p>
-  <% if current_user.seller?%>
-    <strong>Quantity:</strong>
-    <%= book.quantity %>
-  <% end %>
-  </p>
 
 </div>

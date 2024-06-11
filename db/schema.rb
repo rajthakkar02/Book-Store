@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_05_173329) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_10_083733) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,17 +57,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_173329) do
   end
 
   create_table "authors", force: :cascade do |t|
-    t.bigint "seller_id", null: false
+    t.bigint "user_id", null: false
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["seller_id"], name: "index_authors_on_seller_id"
+    t.index ["user_id"], name: "index_authors_on_user_id"
   end
 
   create_table "books", force: :cascade do |t|
     t.bigint "author_id", null: false
-    t.bigint "seller_id", null: false
+    t.bigint "user_id", null: false
     t.string "book_name"
     t.integer "price"
     t.integer "quantity"
@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_173329) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.index ["author_id"], name: "index_books_on_author_id"
-    t.index ["seller_id"], name: "index_books_on_seller_id"
+    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "cart_items", force: :cascade do |t|
@@ -91,6 +91,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_173329) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "feedbacks", force: :cascade do |t|
@@ -107,23 +108,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_173329) do
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "book_id", null: false
-    t.bigint "seller_id", null: false
     t.integer "quantity_of_book_order"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "seller_id", null: false
     t.index ["book_id"], name: "index_orders_on_book_id"
     t.index ["seller_id"], name: "index_orders_on_seller_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
-  end
-
-  create_table "sellers", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "phone_no"
-    t.string "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -137,22 +129,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_173329) do
     t.string "name"
     t.string "phone_no"
     t.boolean "seller"
-    t.bigint "seller_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["seller_id"], name: "index_users_on_seller_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "authors", "sellers"
+  add_foreign_key "authors", "users"
   add_foreign_key "books", "authors"
-  add_foreign_key "books", "sellers"
+  add_foreign_key "books", "users"
   add_foreign_key "cart_items", "books"
   add_foreign_key "cart_items", "carts"
   add_foreign_key "feedbacks", "users"
   add_foreign_key "orders", "books"
-  add_foreign_key "orders", "sellers"
   add_foreign_key "orders", "users"
-  add_foreign_key "users", "sellers"
+  add_foreign_key "orders", "users", column: "seller_id"
 end

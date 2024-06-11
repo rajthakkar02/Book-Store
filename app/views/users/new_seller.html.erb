@@ -1,0 +1,32 @@
+<!-- app/views/users/new_seller.html.erb -->
+<h2>Register as a Seller</h2>
+<%= form_with model: @user, url: register_seller_path, local: true do |f| %>
+  <% if @user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, required: true %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_no, "Phone" %><br>
+    <%= f.text_field :phone_no, required: true %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.email_field :email, required: true %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Register"  %>
+  </div>
+  <br>
+<% end %>
+  <%= button_to "Cancel" , new_user_registration_path , method: :get%>

@@ -12,4 +12,10 @@ class FeedbacksController < ApplicationController
   def feedback_params
     params.require(:feedback).permit(:comment)
   end
+
+  def destroy
+    @feedback = @commentable.feedbacks.find(params[:id])
+    @feedback.destroy
+    redirect_to @commentable, notice: "Feedback was successfully deleted."
+  end
 end

@@ -1,5 +1,5 @@
 class Author < ApplicationRecord
-  belongs_to :seller
+  belongs_to :user
   has_many :orders
   has_many :books , dependent: :destroy
   validates :name , presence: true
@@ -7,7 +7,6 @@ class Author < ApplicationRecord
 
   def total_revenue
     revenue = books.joins(:orders).sum("orders.quantity_of_book_order * books.price")
-    # Rails.logger.debug "Total revenue for author #{self.name}: #{revenue}"
     revenue
   end
 
@@ -19,7 +18,7 @@ class Author < ApplicationRecord
   def total_bookings_current_week
     start_date = Date.today.beginning_of_week
     end_date = Date.today.end_of_week
-    Rails.logger.info
+    Rails.logger.info "..................."
     Rails.logger.info total_bookings_by_period(start_date, end_date)
     total_bookings_by_period(start_date, end_date)
   end

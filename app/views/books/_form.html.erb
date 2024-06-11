@@ -13,12 +13,12 @@
 
   <div>
     <%= form.label :author_id, style: "display: block" %>
-    <%= form.collection_select :author_id, Author.where(seller_id: current_user.seller_id) , :id , :name %>
+    <%= form.collection_select :author_id, Author.where(user_id: current_user.id) , :id , :name %>
   </div>
 
   <div>
-    <% seller_value = Seller.all.collect { |x| [x.id] if x.email == current_user.email }%>
-    <%= form.hidden_field :seller_id, value:seller_value%>
+    <% seller_value = User.all.collect { |x| [x.id] if x.email == current_user.email }%>
+    <%= form.hidden_field :user_id, value:seller_value%>
   </div>
 
   <div>

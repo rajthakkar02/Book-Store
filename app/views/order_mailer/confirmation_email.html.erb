@@ -7,12 +7,12 @@
     <li>
       Book Title: <%= item.book.book_name %><br>
       Quantity: <%= item.quantity %><br>
-      Price per Item: <%= number_to_currency(item.book.price,unit: "Rs ") %><br>
-      Subtotal: <%= number_to_currency(item.book.price * item.quantity,unit: "Rs ") %><br>
+      Price per Item: <%= number_to_currency(item.book.price,unit: "₹ ") %><br>
+      Subtotal: <%= number_to_currency(item.book.price * item.quantity,unit: "₹ ") %><br>
     </li>
   <% end %>
 </ul>
 
-<p>Total Cart Value: <%= number_to_currency(@total_value,unit: "Rs ") %></p>
+<p>Total Cart Value: <%= number_to_currency(@total_value,unit: "₹ ") %></p>
 
 <p>If you have any questions, please contact us.</p>

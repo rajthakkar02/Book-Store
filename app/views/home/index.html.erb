@@ -10,7 +10,7 @@
       <%= link_to 'Ordered Book', orders_path, method: :get, style: " margin-bottom: 10px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; text-align: center;" %>
     </div>
   </nav>
-  <% Author.where(seller_id: current_user.seller_id).each do |author| %>
+  <% Author.where(user_id: current_user.id).each do |author| %>
     <h2 style="margin-left: 20px; font-weight: bold;"><%= author[:name] %></h2>
     <div id="chart-<%= author[:name].parameterize %>" style="height: 300px; margin-bottom: 20px;">
       <%= bar_chart [
@@ -29,7 +29,7 @@
     <%= line_chart @bookings_by_month, xtitle: "Month", ytitle: "Bookings" %>
   </div>
   <h2 style="margin-left: 20px; font-weight: bold;">Popular Order</h2>
-  <div id="pie-chart-oreder">
+  <div id="pie-chart-order">
     <%= pie_chart @popular_book %>
   </div>
 <% elsif user_signed_in? && !current_user.seller? %>
@@ -51,11 +51,11 @@
     </div>
     <div style="margin-bottom: 10px;">
       <%= f.label :author_name_cont, "Filter by Author:", style: "margin-right: 10px;" %>
-      <%= f.select :author_name_cont, Author.all.map { |author| [author.name,author.id] }, include_blank: 'Select Author', style: "padding: 5px; border-radius: 5px; border: 1px solid #ccc;" %>
+      <%= f.select :author_name_cont, Author.all.map { |author| [author.name] }, include_blank: 'Select Author', style: "padding: 5px; border-radius: 5px; border: 1px solid #ccc;" %>
     </div>
     <div style="margin-bottom: 10px;">
-      <%= f.label :seller_name_cont, "Filter by Seller:", style: "margin-right: 10px;" %>
-      <%= f.select :seller_name_cont, Seller.all.map { |seller| [seller.name,seller.id] }, include_blank: 'Select Seller', style: "padding: 5px; border-radius: 5px; border: 1px solid #ccc;" %>
+      <%= f.label :user_name_cont, "Filter by Seller:", style: "margin-right: 10px;" %>
+      <%= f.select :user_name_cont, User.where(seller: 1).map { |user| [user.name] }, include_blank: 'Select Seller', style: "padding: 5px; border-radius: 5px; border: 1px solid #ccc;" %>
     </div>
     <%= f.submit "Search", style: "padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
     <%= link_to "Clear Search", request.path, class: "cancel-button", style: "padding: 10px 20px; background-color: #b00; color: white; border: none; border-radius: 5px; text-decoration: none; margin-left: 10px;" %>
@@ -71,7 +71,7 @@
           <% end %>
           <h2><strong><%= book.book_name %></strong></h2>
           <p><%= book.author.name %></p>
-          <p><%= book.seller.name %></p>
+          <p><%= book.user.name %></p>
           <p>Price: ₹<%= book.price %></p>
           <%= button_to "Add to Cart", add_to_cart_path(book_id: book.id), method: :post, id: "add-cart", style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
           <br>
@@ -84,4 +84,23 @@
 <% else %>
   <h1>Home</h1>
   <%= button_to 'Sign in', new_user_session_path, style: "margin-bottom: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap;  justify-content: center; gap: 30px; margin-bottom: 20px">
+    <% @books.all.each do |book| %>
+      <% if book.quantity > 0 %>
+        <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 30px; width: 300px; text-align: center;">
+          <% if book.image.attached? %>
+            <img src="<%= url_for(book.image) %>" alt="<%= book.book_name %> cover" style="width: 150px; height: auto; margin-bottom: 10px;">
+          <% end %>
+          <h2><strong><%= book.book_name %></strong></h2>
+          <p><%= book.author.name %></p>
+          <p><%= book.user.name %></p>
+          <p>Price: ₹<%= book.price %></p>
+          <%= button_to "Add to Cart", new_user_session_path , method: :post, id: "add-cart", style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
+          <br>
+          <%= button_to "Show Details", book, method: :get, style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
+          <br>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
