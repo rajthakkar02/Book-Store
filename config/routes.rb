@@ -22,7 +22,6 @@ Rails.application.routes.draw do
   get "/register_seller", to: "users#new_seller"
   post "/register_seller", to: "users#create_seller"
   ActiveAdmin.routes(self)
-  # resources :sellers
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
