@@ -8,9 +8,12 @@ Rails.application.routes.draw do
     patch "decrease/:cart_item_id", to: "carts#decrease", as: "decrease"
   end
   resources :books do
-    resources :feedbacks, module: :books
+    resources :feedbacks, only: [:create, :edit, :update, :destroy , :show]
     get "books/:book_id", to: "books#show"
-    delete "books/:book_id/feedbacks/:id", to: "books/feedbacks#destroy"
+    get "/books/:book_id/feedbacks/:id/edit", to: "books/feedbacks#edit"
+  end
+  resources :authors do
+     resources :feedbacks, only: [:create]
   end
   resources :orders
   resources :authors

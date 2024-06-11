@@ -45,7 +45,7 @@ ActiveAdmin.register User do
   member_action :send_reset_password, method: :put do
     user = User.find(params[:id])
     user.update(seller: true)
-    user.send_reset_password_instructions
+    user.send_invitation_email
     redirect_to admin_user_path(user), notice: "Reset password instructions sent to #{user.email} and updated to seller."
   end
 

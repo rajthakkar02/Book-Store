@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     if current_user.seller?
-      @orders = Order.where(seller_id: current_user.id)
+      @orders = Order.where(seller_id: current_user.id).order(created_at: :asc)
     else
       @orders = Order.where(user_id: current_user.id)
     end

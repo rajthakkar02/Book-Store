@@ -1,4 +1,4 @@
-<%= form_for [commentable, Feedback.new] do |f| %>
+<%= form_for [@book, Feedback.new] do |f| %>
   <div>
     <%= f.label :comment %>
     <%= f.text_area :comment, rows: 4 , required: true %>

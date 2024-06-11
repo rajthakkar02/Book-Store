@@ -1,21 +1,53 @@
+# app/controllers/feedbacks_controller.rb
+
 class FeedbacksController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_feedback, only: [:edit, :update, :destroy]
+  before_action :find_commentable, only: [:create, :edit, :update]
 
   def create
-    @feedback = @commentable.feedbacks.new(feedback_params)
+    @feedback = @commentable.feedbacks.build(feedback_params)
     @feedback.user = current_user
-    @feedback.save
 
-    redirect_to @commentable, notice: "Comment created..."
+    if @feedback.save
+      redirect_to @commentable, notice: 'Feedback was successfully created.'
+    else
+      redirect_to @commentable, alert: 'Failed to create feedback.'
+    end
   end
+
+  def edit
+  end
+
+  def update
+    if @feedback.update(feedback_params)
+      redirect_to @feedback.commentable, notice: 'Feedback was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    commentable = @feedback.commentable
+    @feedback.destroy
+    redirect_to commentable, notice: 'Feedback was successfully deleted.'
+  end
+
+  private
 
   def feedback_params
     params.require(:feedback).permit(:comment)
   end
 
-  def destroy
-    @feedback = @commentable.feedbacks.find(params[:id])
-    @feedback.destroy
-    redirect_to @commentable, notice: "Feedback was successfully deleted."
+  def set_feedback
+    @feedback = Feedback.find(params[:id])
+  end
+
+  def find_commentable
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        @commentable = $1.classify.constantize.find(value)
+      end
+    end
   end
 end

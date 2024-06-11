@@ -4,7 +4,7 @@ class Authors::FeedbacksController < FeedbacksController
     private
   
     def set_commentable
-      @commentable = User.find(params[:user_id])
+      @commentable = User.find(params[:author_id])
     end
   
   end

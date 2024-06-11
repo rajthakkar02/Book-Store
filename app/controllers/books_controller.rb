@@ -4,9 +4,9 @@ class BooksController < ApplicationController
   # GET /books or /books.json
   def index
     if current_user.seller?
-      @books = Book.where(user_id: current_user.id)
+      @books = Book.where(user_id: current_user.id).order(created_at: :asc)
     else
-      @books = Book.all
+      @books = Book.all.order(created_at: :asc)
     end
   end
 

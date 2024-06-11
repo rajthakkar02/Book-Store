@@ -3,7 +3,7 @@
 <h1>Your Cart</h1>
 <ul style="list-style-type: none; padding: 0;">
   <% total_cart_value = 0 %>
-  <% @cart.cart_items.each do |item| %>
+  <% @cart.cart_items.order(created_at: :asc).each do |item| %>
     <li style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
       <h2><%= item.book.book_name %></h2>
       <p>Quantity: <%= item.quantity %></p>

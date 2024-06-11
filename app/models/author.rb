@@ -1,6 +1,7 @@
 class Author < ApplicationRecord
   belongs_to :user
   has_many :orders
+  has_many :feedbacks, as: :commentable, dependent: :destroy
   has_many :books , dependent: :destroy
   validates :name , presence: true
   validates :email , presence:true

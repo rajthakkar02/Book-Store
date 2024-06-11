@@ -1,0 +1,4 @@
+<p>Hello, <%= @user.name.present? ? @user.name : @user.email %></p>
+<p>You have got an invitation from Book Store Seller Portal. Click the link below to set your password.</p>
+<%= link_to 'Create a password', "http://localhost:3000" + "/users/password/edit?reset_password_token=#{@token}" %>
+<p>Thank you</p>

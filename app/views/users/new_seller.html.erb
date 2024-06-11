@@ -1,5 +1,5 @@
 <!-- app/views/users/new_seller.html.erb -->
-<h2>Register as a Seller</h2>
+<h2>Fill this form, we will verify your detail.</h2>
 <%= form_with model: @user, url: register_seller_path, local: true do |f| %>
   <% if @user.errors.any? %>
     <div style="color: red">
@@ -17,7 +17,8 @@
     <%= f.text_field :name, required: true %>
   </div>
   <div class="field">
-    <%= f.label :phone_no, "Phone" %><br>
+    <%= f.label :phone_no, "Phone" %>
+    <br>
     <%= f.text_field :phone_no, required: true %>
   </div>
   <div class="field">

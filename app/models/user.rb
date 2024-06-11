@@ -7,9 +7,19 @@ class User < ApplicationRecord
   validates :phone_no, presence: true, uniqueness: true, length: { is: 10, message: "Enter 10 digit mobile number" }, numericality: { only_integer: true, message: "Only digit is allowed" }
   validates :name, presence: true
   has_many :books, dependent: :destroy
+  has_many :feedbacks, dependent: :destroy
   has_many :orders
   has_many :authors, dependent: :destroy
   has_many :sold_orders, class_name: "Order", foreign_key: "seller_id"
+
+  def send_invitation_email
+    raw, hashed = Devise.token_generator.generate(User, :reset_password_token)
+    token = raw
+    self.reset_password_token = hashed
+    self.reset_password_sent_at = Time.now.utc
+    self.save
+    UserMailer.invitation(self, token).deliver_later
+  end
 
   # after_create :assign_admin_if_seller_matches
   # after_create :assign_seller_id
