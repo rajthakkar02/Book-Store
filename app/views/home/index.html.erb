@@ -22,11 +22,11 @@
   <% end %>
   <h2 style="margin-left: 20px; font-weight: bold;">Total Orders by Week</h2>
   <div id="chart-week">
-    <%= line_chart @bookings_by_week, xtitle: "Week", ytitle: "Bookings" %>
+    <%= line_chart @bookings_by_week, xtitle: "Week", ytitle: "Order Count" %>
   </div>
   <h2 style="margin-left: 20px; font-weight: bold;">Total Orders by Month</h2>
   <div id="chart-month">
-    <%= line_chart @bookings_by_month, xtitle: "Month", ytitle: "Bookings" %>
+    <%= line_chart @bookings_by_month, xtitle: "Month", ytitle: "Order Count" %>
   </div>
   <h2 style="margin-left: 20px; font-weight: bold;">Popular Order</h2>
   <div id="pie-chart-order">
