@@ -12,7 +12,7 @@ class FeedbacksController < ApplicationController
     if @feedback.save
       redirect_to @commentable, notice: 'Feedback was successfully created.'
     else
-      redirect_to @commentable, alert: 'Failed to create feedback.'
+      redirect_to @commentable, alert: 'All fields are required.'
     end
   end
 
@@ -36,7 +36,7 @@ class FeedbacksController < ApplicationController
   private
 
   def feedback_params
-    params.require(:feedback).permit(:comment)
+    params.require(:feedback).permit(:comment, :rating)
   end
 
   def set_feedback

@@ -2,7 +2,8 @@
   <div>
     <p style="font-weight: bold; color: #333;"><%= feedback.user.name %></p>
     <div style="padding-left: 10px; color: #555;">
-      <%= feedback.comment %>
+      <p>Comment : <%= feedback.comment %> </p>
+      <p>Rating : <%= feedback.rating %> </p>
       <br>
       <% if feedback.user == current_user %>
         <%= button_to 'Delete', book_feedback_path(@book, feedback), method: :delete, data: { confirm: 'Are you sure?' } %>

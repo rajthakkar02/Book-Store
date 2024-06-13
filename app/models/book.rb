@@ -22,4 +22,13 @@ class Book < ApplicationRecord
     self.quantity += quantity
     save!
   end
+
+  def average_rating
+    feedbacks.average(:rating).to_f.round(1)
+  end
+
+
+  def self.popular_rating
+    joins(:feedbacks).group("books.book_name").average(:rating)
+  end
 end

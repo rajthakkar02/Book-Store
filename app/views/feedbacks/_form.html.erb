@@ -1,10 +1,13 @@
 <%= form_for [@book, Feedback.new] do |f| %>
-  <div>
-    <%= f.label :comment %>
-    <%= f.text_area :comment, rows: 4 , required: true %>
+  <div style="margin-bottom: 15px;">
+    <%= f.label :comment, style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+    <%= f.text_area :comment, rows: 4, required: true, style: "width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" %>
   </div>
-  <br>
+  <div style="margin-bottom: 15px;">
+    <%= f.label :rating, style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+    <%= f.number_field :rating, in: 1.0..10.0, step: :any,required: true, style: "width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" %>
+  </div>
   <div>
-    <%= f.submit "Write feedback" %>
+    <%= f.submit "Write feedback", style: "background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;" %>
   </div>
 <% end %>

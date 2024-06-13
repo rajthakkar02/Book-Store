@@ -10,16 +10,30 @@
       <%= link_to 'Ordered Book', orders_path, method: :get, style: " margin-bottom: 10px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; text-align: center;" %>
     </div>
   </nav>
-  <% Author.where(user_id: current_user.id).each do |author| %>
-    <h2 style="margin-left: 20px; font-weight: bold;"><%= author[:name] %></h2>
-    <div id="chart-<%= author[:name].parameterize %>" style="height: 300px; margin-bottom: 20px;">
-      <%= bar_chart [
-        ["Current Week", author.total_bookings_current_week],
-        ["Current Month", author.total_bookings_current_month],
-        ["Current Year", author.total_bookings_current_year]
-      ], colors: ["#b00", "#666"] %>
-    </div>
-  <% end %>
+
+  <h2 style="margin-left: 20px; font-weight: bold;">Total bookings of books by author for current week</h2>
+  <% 
+    data_week = Author.where(user_id: current_user.id).map do |author|
+    ["#{author[:name]}", author.total_bookings_current_week]
+  end
+  %>
+  <%= bar_chart data_week, colors: ["#b00", "#666"], height: '500px' %>
+
+  <h2 style="margin-left: 20px; font-weight: bold;">Total bookings of books by author for current month</h2>
+  <% 
+    data_month = Author.where(user_id: current_user.id).map do |author|
+    ["#{author[:name]}", author.total_bookings_current_month]
+  end
+  %>
+  <%= bar_chart data_month, colors: ["#b00", "#666"], height: '500px' %>
+
+  <h2 style="margin-left: 20px; font-weight: bold;">Total bookings of books by author for current year</h2>
+  <% 
+    data_year = Author.where(user_id: current_user.id).map do |author|
+    ["#{author[:name]}", author.total_bookings_current_year]
+  end
+  %>
+  <%= bar_chart data_year, colors: ["#b00", "#666"], height: '500px' %>
   <h2 style="margin-left: 20px; font-weight: bold;">Total Orders by Week</h2>
   <div id="chart-week">
     <%= line_chart @bookings_by_week, xtitle: "Week", ytitle: "Order Count" %>
@@ -28,9 +42,13 @@
   <div id="chart-month">
     <%= line_chart @bookings_by_month, xtitle: "Month", ytitle: "Order Count" %>
   </div>
-  <h2 style="margin-left: 20px; font-weight: bold;">Popular Order</h2>
+  <h2 style="margin-left: 20px; font-weight: bold;">Most Popular books based on Orders</h2>
   <div id="pie-chart-order">
     <%= pie_chart @popular_book %>
+  </div>
+  <h2 style="margin-left: 20px; font-weight: bold;">Most Popular books based on Rating</h2>
+  <div id="pie-chart-order">
+    <%= pie_chart @popular_rating %>
   </div>
 <% elsif user_signed_in? && !current_user.seller? %>
   <nav style="display: flex; justify-content: space-between; align-items: center; background-color: #333; padding: 10px;">
@@ -84,7 +102,7 @@
 <% else %>
   <h1>Home</h1>
   <%= button_to 'Sign in', new_user_session_path, style: "margin-bottom: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
-    <div style="display: flex; flex-direction: row; flex-wrap: wrap;  justify-content: center; gap: 30px; margin-bottom: 20px">
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap;  justify-content: center; gap: 30px; margin-bottom: 20px">
     <% @books.all.each do |book| %>
       <% if book.quantity > 0 %>
         <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 30px; width: 300px; text-align: center;">
