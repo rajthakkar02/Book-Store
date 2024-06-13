@@ -78,6 +78,9 @@
     <%= f.submit "Search", style: "padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
     <%= link_to "Clear Search", request.path, class: "cancel-button", style: "padding: 10px 20px; background-color: #b00; color: white; border: none; border-radius: 5px; text-decoration: none; margin-left: 10px;" %>
   <% end %>
+  <% if @books.empty? %>
+    <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; font-size: x-large">No data found.</p>
+  <% end %>
   <br>
   <br>
   <div style="display: flex; flex-direction: row; flex-wrap: wrap;  justify-content: center; gap: 30px; margin-bottom: 20px">
