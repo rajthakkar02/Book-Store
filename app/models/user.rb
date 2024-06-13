@@ -12,6 +12,10 @@ class User < ApplicationRecord
   has_many :authors, dependent: :destroy
   has_many :sold_orders, class_name: "Order", foreign_key: "seller_id"
 
+  def ordered?(book)
+    orders.exists?(book_id: book.id)
+  end
+
   def send_invitation_email
     raw, hashed = Devise.token_generator.generate(User, :reset_password_token)
     token = raw

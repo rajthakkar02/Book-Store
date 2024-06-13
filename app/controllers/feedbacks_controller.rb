@@ -3,16 +3,23 @@
 class FeedbacksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_feedback, only: [:edit, :update, :destroy]
-  before_action :find_commentable, only: [:create, :edit, :update]
+  before_action :set_commentable
 
   def create
     @feedback = @commentable.feedbacks.build(feedback_params)
     @feedback.user = current_user
 
-    if @feedback.save
-      redirect_to @commentable, notice: 'Feedback was successfully created.'
+    if Feedback.exists?(user_id: current_user.id)
+      flash[:alert] = "You have already given feedback for this book."
+      redirect_to @commentable
     else
-      redirect_to @commentable, alert: 'All fields are required.'
+      if @feedback.save
+        flash[:notice] = "Feedback submitted successfully."
+        redirect_to @commentable, notice: "Feedback was successfully created."
+      else
+        flash[:alert] = "Error submitting feedback."
+        render :new
+      end
     end
   end
 
@@ -21,16 +28,16 @@ class FeedbacksController < ApplicationController
 
   def update
     if @feedback.update(feedback_params)
-      redirect_to @feedback.commentable, notice: 'Feedback was successfully updated.'
+      redirect_to @commentable, notice: "Feedback was successfully updated."
     else
       render :edit
     end
   end
 
   def destroy
-    commentable = @feedback.commentable
+    @feedback = @commentable.feedbacks.find(params[:id])
     @feedback.destroy
-    redirect_to commentable, notice: 'Feedback was successfully deleted.'
+    redirect_to @commentable, notice: "Feedback was successfully deleted."
   end
 
   private
@@ -43,11 +50,15 @@ class FeedbacksController < ApplicationController
     @feedback = Feedback.find(params[:id])
   end
 
+  def set_commentable
+    @commentable = find_commentable
+  end
+
   def find_commentable
-    params.each do |name, value|
-      if name =~ /(.+)_id$/
-        @commentable = $1.classify.constantize.find(value)
-      end
+    if params[:book_id]
+      Book.find(params[:book_id])
+    else
+      fail "Unsupported commentable"
     end
   end
 end

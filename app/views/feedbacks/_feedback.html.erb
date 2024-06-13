@@ -1,12 +1,14 @@
-<div id="<%= dom_id feedback %>" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background-color: #58b6f5;">
+<div id="<%= dom_id feedback %>" style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; background-color: #e3f2fd; border-radius: 8px;">
   <div>
-    <p style="font-weight: bold; color: #333;"><%= feedback.user.name %></p>
+    <p style="font-weight: bold; color: #333; font-size: 1.2em; margin: 0 0 5px 0;"><%= feedback.user.name %></p>
     <div style="padding-left: 10px; color: #555;">
-      <p>Comment : <%= feedback.comment %> </p>
-      <p>Rating : <%= feedback.rating %> </p>
+      <p style="margin: 5px 0;">Comment: <span style="color: #000;"><%= feedback.comment %></span></p>
+      <p style="margin: 5px 0;">Rating: <span style="color: #000;"><%= feedback.rating %></span></p>
       <br>
       <% if feedback.user == current_user %>
-        <%= button_to 'Delete', book_feedback_path(@book, feedback), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= button_to "Edit", edit_book_feedback_path(@book, feedback), method: :get, style: "background-color: #4CAF50; color: white; padding: 8px 12px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; border: none; border-radius: 4px;" %>
+        <br>
+        <%= button_to 'Delete', book_feedback_path(@book, feedback), method: :delete, data: { confirm: 'Are you sure?' }, style: "background-color: #f44336; color: white; padding: 8px 12px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; border: none; border-radius: 4px; " %>
       <% end %>
     </div>
   </div>
