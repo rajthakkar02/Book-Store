@@ -12,8 +12,8 @@
 <% else %>
   <p style="color: #888; font-style: italic; margin-bottom: 30px;">No feedbacks yet.</p>
 <% end %>
-<% if current_user.present? && !current_user.seller? %>
-  <% if current_user.ordered?(@book) %>
+<% if current_user.present? && !current_user.seller? && current_user.ordered?(@book) %>
+  <% unless @book_feedback %>
     <h2 style="font-weight: bold; color: #000; margin-top: 40px; margin-bottom: 20px;">Leave a Feedback</h2>
     <div style="margin-bottom: 30px;">
       <%= render "feedbacks/form", commentable: @book, feedback: @feedback %>

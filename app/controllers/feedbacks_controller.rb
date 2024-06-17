@@ -9,10 +9,10 @@ class FeedbacksController < ApplicationController
     @feedback = @commentable.feedbacks.build(feedback_params)
     @feedback.user = current_user
 
-    if Feedback.exists?(user_id: current_user.id)
-      flash[:alert] = "You have already given feedback for this book."
-      redirect_to @commentable
-    else
+    # if Feedback.where(user_id: current_user.id).exists?
+    #   flash[:alert] = "You have already given feedback for this book."
+    #   redirect_to @commentable
+    # else
       if @feedback.save
         flash[:notice] = "Feedback submitted successfully."
         redirect_to @commentable, notice: "Feedback was successfully created."
@@ -20,7 +20,7 @@ class FeedbacksController < ApplicationController
         flash[:alert] = "Error submitting feedback."
         render :new
       end
-    end
+    # end
   end
 
   def edit

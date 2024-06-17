@@ -12,6 +12,7 @@ class BooksController < ApplicationController
 
   # GET /books/1 or /books/1.json
   def show
+    @book_feedback = @book.feedbacks.find_by(user_id: current_user&.id)
   end
 
   # GET /books/new
