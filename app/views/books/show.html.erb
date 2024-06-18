@@ -1,13 +1,11 @@
-<p style="color: green; font-size: 1.2em; margin-bottom: 20px;">
-  <%= notice if current_user.seller? %>
-</p>
 <div style="margin-bottom: 30px;">
   <%= render @book %>
 </div>
+<%= button_to "Add to Cart", add_to_cart_path(book_id: @book.id), method: :post, id: "add-cart", style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" if !current_user.seller?%>
 <h2 style="font-weight: bold; color: #000; margin-top: 40px; margin-bottom: 20px;">Feedbacks</h2>
 <% if @book.feedbacks.any? %>
   <div style="margin-bottom: 30px;">
-    <%= render partial: "feedbacks/feedback", collection: @book.feedbacks %>
+    <%= render partial: "feedbacks/feedback", collection: @book.feedbacks, locals: {commentable: @book} %>
   </div>
 <% else %>
   <p style="color: #888; font-style: italic; margin-bottom: 30px;">No feedbacks yet.</p>

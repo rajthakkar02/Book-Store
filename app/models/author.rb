@@ -1,9 +1,9 @@
 class Author < ApplicationRecord
   belongs_to :user
   has_many :feedbacks, as: :commentable, dependent: :destroy
-  has_many :books , dependent: :destroy
-  validates :name , presence: true
-  validates :email , presence:true
+  has_many :books, dependent: :destroy
+  validates :name, presence: true
+  validates :email, presence: true
 
   def total_revenue
     revenue = books.joins(:orders).sum("orders.quantity_of_book_order * books.price")
@@ -33,5 +33,17 @@ class Author < ApplicationRecord
     start_date = Date.today.beginning_of_year
     end_date = Date.today.end_of_year
     total_bookings_by_period(start_date, end_date)
+  end
+
+  def average_rating
+    feedbacks.average(:rating).to_f.round(1)
+  end
+
+  def orders
+    Order.joins(:book).where(books: { author_id: id })
+  end
+
+  def has_received_orders?
+    orders.exists?
   end
 end

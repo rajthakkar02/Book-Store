@@ -1,11 +1,33 @@
-<p style="color: green"><%= notice %></p>
 <%= render @author %>
-<p>
-  <strong>Total Revenue:</strong>
-  <%= number_to_currency(@total_revenue,unit:"₹ ") %>
-</p>
+<% if current_user.seller? %>
+  <p>
+    <strong>Total Revenue:</strong>
+    <%= number_to_currency(@total_revenue,unit:"₹ ") %>
+  </p>
+<% end %>
+<% if @author.feedbacks.any? %>
+  <div style="margin-bottom: 30px;">
+    <%= render partial: "feedbacks/feedback", collection: @author.feedbacks , locals: {commentable: @author} %>
+  </div>
+<% else %>
+  <p style="color: #888; font-style: italic; margin-bottom: 30px;">No feedbacks yet.</p>
+<% end %>
+<% if current_user.present? && !current_user.seller?  %>
+  <% unless @author_has_feedback %>
+    <% if @author.has_received_orders? %>
+      <h2 style="font-weight: bold; color: #000; margin-top: 40px; margin-bottom: 20px;">Leave a Feedback</h2>
+      <div style="margin-bottom: 30px;">
+        <%= render "feedbacks/form", commentable: @author, feedback: @feedback %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
 <div>
-  <%= link_to "Edit this author", edit_author_path(@author) %> |
-  <%= link_to "Back to authors", authors_path %>
-  <%= button_to "Destroy this author", @author, method: :delete %>
+  <% if current_user&.seller? %>
+    <%= link_to "Edit this author", edit_author_path(@author) %> |
+    <%= link_to "Back to authors", authors_path %>
+    <%= button_to "Destroy this author", @author, method: :delete %>
+  <% else %>
+    <%= link_to "Dashboard", root_path, style: "color: #fff; background-color: #28a745; padding: 10px 15px; text-decoration: none; border-radius: 5px;" %>
+  <% end %>
 </div>

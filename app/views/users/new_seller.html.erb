@@ -1,33 +1,19 @@
-<!-- app/views/users/new_seller.html.erb -->
-<h2>Fill this form, we will verify your detail.</h2>
-<%= form_with model: @user, url: register_seller_path, local: true do |f| %>
-  <% if @user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, required: true %>
+<h2 style="font-weight: bold;">Fill this form, we will verify your detail.</h2>
+<%= form_with url: register_seller_path, method: :post, local: true, class: "contents" do |form| %>
+  <div style="margin-bottom: 15px;">
+    <%= form.label :name, "Your Name", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+    <%= form.text_field :name, value: params[:name], style: "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" %>
   </div>
-  <div class="field">
-    <%= f.label :phone_no, "Phone" %>
-    <br>
-    <%= f.text_field :phone_no, required: true %>
+  <div style="margin-bottom: 15px;">
+    <%= form.label :email, "Email (we will contact you on this email)", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+    <%= form.email_field :email, value: params[:email], style: "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.email_field :email, required: true %>
+  <div style="margin-bottom: 15px;">
+    <%= form.label :phone_no, "Phone no (Should only be 10 digits)", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+    <%= form.number_field :phone_no, value: params[:phone_no], placeholder: "e.g. 9876543210", style: "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" %>
   </div>
-  <div class="actions">
-    <%= f.submit "Register"  %>
+  <div>
+    <%= form.submit "Submit details", style: "background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;" %>
   </div>
-  <br>
 <% end %>
-  <%= button_to "Cancel" , new_user_registration_path , method: :get%>
+  <%= button_to "Cancel" , new_user_registration_path , method: :get , style:"margin-top:10px; border-radius: 3px"%>

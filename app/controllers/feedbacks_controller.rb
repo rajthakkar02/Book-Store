@@ -1,26 +1,19 @@
-# app/controllers/feedbacks_controller.rb
-
 class FeedbacksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_feedback, only: [:edit, :update, :destroy]
   before_action :set_commentable
+  before_action :set_feedback, only: [:edit, :update, :destroy]
 
   def create
     @feedback = @commentable.feedbacks.build(feedback_params)
     @feedback.user = current_user
 
-    # if Feedback.where(user_id: current_user.id).exists?
-    #   flash[:alert] = "You have already given feedback for this book."
-    #   redirect_to @commentable
-    # else
-      if @feedback.save
-        flash[:notice] = "Feedback submitted successfully."
-        redirect_to @commentable, notice: "Feedback was successfully created."
-      else
-        flash[:alert] = "Error submitting feedback."
-        render :new
-      end
-    # end
+    if @feedback.save
+      flash[:notice] = "Feedback submitted successfully."
+      redirect_to @commentable, notice: "Feedback was successfully created."
+    else
+      flash[:alert] = "Error submitting feedback."
+      render :new
+    end
   end
 
   def edit
@@ -30,12 +23,11 @@ class FeedbacksController < ApplicationController
     if @feedback.update(feedback_params)
       redirect_to @commentable, notice: "Feedback was successfully updated."
     else
-      render :edit
+      render :edit , status: 422
     end
   end
 
   def destroy
-    @feedback = @commentable.feedbacks.find(params[:id])
     @feedback.destroy
     redirect_to @commentable, notice: "Feedback was successfully deleted."
   end
@@ -47,7 +39,7 @@ class FeedbacksController < ApplicationController
   end
 
   def set_feedback
-    @feedback = Feedback.find(params[:id])
+    @feedback = @commentable.feedbacks.find(params[:id])
   end
 
   def set_commentable
@@ -57,6 +49,8 @@ class FeedbacksController < ApplicationController
   def find_commentable
     if params[:book_id]
       Book.find(params[:book_id])
+    elsif params[:author_id]
+      Author.find(params[:author_id])
     else
       fail "Unsupported commentable"
     end

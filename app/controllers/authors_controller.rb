@@ -21,6 +21,7 @@ class AuthorsController < ApplicationController
         total += order.quantity_of_book_order * book.price
       end
     end
+    @author_has_feedback = @author.feedbacks.find_by(user_id: current_user&.id)
   end
 
   # GET /authors/new
