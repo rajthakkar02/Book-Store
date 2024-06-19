@@ -14,7 +14,7 @@
 <% end %>
 <% if current_user.present? && !current_user.seller?  %>
   <% unless @author_has_feedback %>
-    <% if @author.has_received_orders? %>
+    <% if current_user.has_received_orders?(current_user) %>
       <h2 style="font-weight: bold; color: #000; margin-top: 40px; margin-bottom: 20px;">Leave a Feedback</h2>
       <div style="margin-bottom: 30px;">
         <%= render "feedbacks/form", commentable: @author, feedback: @feedback %>

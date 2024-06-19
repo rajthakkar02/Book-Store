@@ -16,6 +16,10 @@ class User < ApplicationRecord
     orders.exists?(book_id: book.id)
   end
 
+  def has_received_orders?(user)
+    orders.where(user_id: user.id).exists?
+  end
+
   def send_invitation_email
     raw, hashed = Devise.token_generator.generate(User, :reset_password_token)
     token = raw

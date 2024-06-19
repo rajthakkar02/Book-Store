@@ -39,11 +39,4 @@ class Author < ApplicationRecord
     feedbacks.average(:rating).to_f.round(1)
   end
 
-  def orders
-    Order.joins(:book).where(books: { author_id: id })
-  end
-
-  def has_received_orders?
-    orders.exists?
-  end
 end

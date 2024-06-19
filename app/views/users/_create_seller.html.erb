@@ -1,0 +1,17 @@
+<%= form_with url: register_seller_path, method: :post, local: true, class: "contents" do |form| %>
+  <div style="margin-bottom: 15px;">
+    <%= form.label :name, "Your Name", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+    <%= form.text_field :name, value: params[:name], style: "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" %>
+  </div>
+  <div style="margin-bottom: 15px;">
+    <%= form.label :email, "Email (we will contact you on this email)", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+    <%= form.email_field :email, value: params[:email], style: "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" %>
+  </div>
+  <div style="margin-bottom: 15px;">
+    <%= form.label :phone_no, "Phone no (Should only be 10 digits)", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+    <%= form.number_field :phone_no, value: params[:phone_no], placeholder: "e.g. 9876543210", style: "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" %>
+  </div>
+  <div>
+    <%= form.submit "Submit details", style: "background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;" %>
+  </div>
+<% end %>
