@@ -1,7 +1,7 @@
 <div style="margin-bottom: 30px;">
   <%= render @book %>
 </div>
-<%= button_to "Add to Cart", add_to_cart_path(book_id: @book.id), method: :post, id: "add-cart", style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" if !current_user.seller?%>
+<%= button_to "Add to Cart", add_to_cart_path(book_id: @book.id), method: :post, id: "add-cart", style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" if !current_user&.seller? %>
 <h2 style="font-weight: bold; color: #000; margin-top: 40px; margin-bottom: 20px;">Feedbacks</h2>
 <% if @book.feedbacks.any? %>
   <div style="margin-bottom: 30px;">
