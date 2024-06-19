@@ -25,10 +25,10 @@ class UsersController < ApplicationController
     #     render :new_seller
     #   end
 
-    @admin_details = params.permit(:name, :email, :phone_no)
+    @seller_details = params.permit(:name, :email, :phone_no)
 
-    if @admin_details[:name].present? && @admin_details[:email].present? && valid_email?(@admin_details[:email]) && @admin_details[:phone_no].present? && valid_phone_no?(@admin_details[:phone_no])
-      SuperAdminMailer.new_seller_registration(@admin_details).deliver_later
+    if @seller_details[:name].present? && @seller_details[:email].present? && valid_email?(@seller_details[:email]) && @seller_details[:phone_no].present? && valid_phone_no?(@seller_details[:phone_no])
+      SuperAdminMailer.new_seller_registration(@seller_details).deliver_later
       flash[:notice] = "Thank you for submitting the form, We will contact you to verify details soon"
       redirect_to root_path
     else
