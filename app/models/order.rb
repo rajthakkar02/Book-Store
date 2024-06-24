@@ -6,6 +6,7 @@ class Order < ApplicationRecord
     Order_Placed: 0,
     Shipped: 1,
     Delivered: 2,
+    Canceled: 3,
   }
 
   belongs_to :seller, class_name: "User", foreign_key: "seller_id"
@@ -29,13 +30,13 @@ class Order < ApplicationRecord
   after_create :decrease_book_stock
   after_destroy :increase_book_stock
 
+  def increase_book_stock
+    book.update_stock_after_destroy!(quantity_of_book_order)
+  end
+
   private
 
   def decrease_book_stock
     book.update_stock!(quantity_of_book_order)
-  end
-
-  def increase_book_stock
-    book.update_stock_after_destroy!(quantity_of_book_order)
   end
 end

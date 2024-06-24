@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[show edit update destroy]
+  before_action :set_order, only: %i[show edit update destroy cancel]
   before_action :authenticate_user!
 
   # GET /orders or /orders.json
@@ -77,6 +77,18 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+
+  def cancel
+    if @order.status != 'Delivered'
+      @order.update(status: :Canceled)
+      @order.increase_book_stock
+      CancelMailer.cancel_mailer(current_user,@order).deliver_now
+      redirect_to orders_url, notice: "Order was successfully canceled."
+    else
+      redirect_to orders_url, alert: "Order cannot be canceled as it has already been delivered."
     end
   end
 

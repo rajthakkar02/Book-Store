@@ -11,9 +11,9 @@ class HomeController < ApplicationController
           total_bookings_year: author.total_bookings_current_year,
         }
       end
-      @bookings_by_week = Order.where(seller_id: current_user.id).bookings_by_week
-      @bookings_by_month = Order.where(seller_id: current_user.id).bookings_by_month
-      @popular_book = Order.where(seller_id: current_user.id).popular_book
+      @bookings_by_week = Order.where(seller_id: current_user.id).where.not(status: :Canceled).bookings_by_week
+      @bookings_by_month = Order.where(seller_id: current_user.id).where.not(status: :Canceled).bookings_by_month
+      @popular_book = Order.where(seller_id: current_user.id).where.not(status: :Canceled).popular_book
       @popular_rating = Book.where(user_id: current_user.id).all.popular_rating
     else
       @books = Book.all

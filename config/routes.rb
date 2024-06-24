@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   resources :authors do
     resources :feedbacks, only: [:create, :edit, :update, :destroy]
   end
-  resources :orders
+  resources :orders do
+    member do
+      patch :cancel
+    end
+  end
   resources :authors
   devise_for :users
 

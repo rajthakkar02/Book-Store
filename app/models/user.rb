@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :sold_orders, class_name: "Order", foreign_key: "seller_id"
 
   def ordered?(book)
-    orders.exists?(book_id: book.id)
+    orders.where(status: :Delivered).exists?(book_id: book.id)
   end
 
   def has_received_orders?(user)

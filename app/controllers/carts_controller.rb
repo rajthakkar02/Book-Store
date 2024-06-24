@@ -11,10 +11,10 @@ class CartsController < ApplicationController
     @cart_item.quantity ||= 0
     if book.quantity >= @cart_item.quantity
       @cart_item.quantity += 1
-      redirect_to root_path, notice: "Book added to cart."
+      redirect_back fallback_location: root_path, notice: "Book added to cart."
       @cart_item.save
     else
-      redirect_to root_path, alert: "Unable to add book to cart."
+      redirect_back fallback_location: root_path, alert: "Unable to add book to cart."
     end
   end
 

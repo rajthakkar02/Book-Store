@@ -1,0 +1,14 @@
+<div>
+  <h1>Order Cancellation Notice</h1>
+</div>
+<div>
+  <p>Dear <%= @user.name %>,</p>
+  <p>We regret to inform you that your order with order number <strong><%= @order.id %></strong> placed on <strong><%= @order.created_at.strftime('%B %d, %Y') %></strong> has been cancelled. We apologize for any inconvenience this may cause.</p>
+  <p>Order Details:</p>
+  <ul>
+    <li>Order Date: <strong><%= @order.created_at.strftime('%B %d, %Y') %></strong></li>
+    <% total_amount =  @order.quantity_of_book_order * @order.book.price%>
+    <li>Total Amount: <strong><%= number_to_currency(total_amount , unit: "₹ ") %></strong></li>
+  </ul>
+  <p>If you have any questions or need further assistance, please do not hesitate to contact our customer service team.</p>
+  <p>Thank you for your understanding.</p>
