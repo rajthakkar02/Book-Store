@@ -40,25 +40,6 @@
   end %>
     <%= bar_chart data_year, colors: ["#b00", "#666"], height: '500px' %>
   </div>
-  <script>
-    function selectTimePeriod(select) {
-      var selectedValue = select.value;
-      if (selectedValue === 'week') {
-        document.getElementById('chart-week').style.display = 'block';
-        document.getElementById('chart-month').style.display = 'none';
-        document.getElementById('chart-year').style.display = 'none';
-
-      } else if (selectedValue === 'month') {
-        document.getElementById('chart-week').style.display = 'none';
-        document.getElementById('chart-month').style.display = 'block';
-        document.getElementById('chart-year').style.display = 'none';
-      }  else if (selectedValue === 'year') {
-        document.getElementById('chart-week').style.display = 'none';
-        document.getElementById('chart-month').style.display = 'none';
-        document.getElementById('chart-year').style.display = 'block';
-      }
-    }
-  </script>
   <h2 style="margin-left: 20px; font-weight: bold;">Total Orders by Week</h2>
   <div id="chart-week" style="margin-left: 50px; margin-right: 50px">
     <%= line_chart @bookings_by_week, xtitle: "Week", ytitle: "Order Count" %>

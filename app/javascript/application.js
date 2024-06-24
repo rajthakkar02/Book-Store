@@ -4,4 +4,7 @@ import "controllers"
 
 import "chartkick"
 import "Chart.bundle"
-import './carts';
+import './carts'
+
+import "./custom/graph"
+
