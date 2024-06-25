@@ -100,7 +100,7 @@
           <p><%=link_to "#{book.author.name}" , author_path(book.author_id) , method: :get %></p>
           <p><%= book.user.name %></p>
           <p>Price: ₹<%= book.price %></p>
-          <%= button_to "Add to Cart", add_to_cart_path(book_id: book.id), method: :post, id: "add-cart", style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
+          <%= button_to "Add to Cart", add_to_cart_path(book_id: book.id), method: :post, id: "add-cart-#{book.id}", style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;", onclick: "changes(#{book.id})" %>
           <br>
           <%= button_to "Show Details", book, method: :get, style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
           <br>
@@ -123,7 +123,7 @@
           <p><%= book.author.name %></p>
           <p><%= book.user.name %></p>
           <p>Price: ₹<%= book.price %></p>
-          <%= button_to "Add to Cart", new_user_session_path , method: :get, id: "add-cart", style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
+          <%= button_to "Add to Cart", new_user_session_path, method: :get, id: "add-cart-#{book.id}", style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;", onclick: "changes(#{book.id})" %>
           <br>
           <%= button_to "Show Details", book, method: :get, style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
           <br>
@@ -132,3 +132,9 @@
     <% end %>
   </div>
 <% end %>
+<script>
+  function changes(bookId) {
+    var cart = document.getElementById("add-cart-" + bookId);
+    cart.classList.add("glow");
+  }
+</script>

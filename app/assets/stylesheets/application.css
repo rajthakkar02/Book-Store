@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+@keyframes glow {
+    0% {
+        background: green;
+        color: black
+    }
+
+    100% {
+        background: none;
+    }
+}
+
+.glow {
+    animation: glow 2s;
+}
