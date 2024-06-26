@@ -1,5 +1,6 @@
 class CartItemsController < ApplicationController
-    before_action :set_cart_item, only: %i[ show edit update destroy new ]
+  before_action :authenticate_user!, except: [:create , :destroy]
+  before_action :set_cart_item, only: [:show, :edit, :update, :destroy]
 
   # GET /cart_items or /cart_items.json
   def index
@@ -49,7 +50,7 @@ class CartItemsController < ApplicationController
 
   # DELETE /cart_items/1 or /cart_items/1.json
   def destroy
-    @cart_item.destroy!
+    @cart_item.destroy
 
     respond_to do |format|
       format.html { redirect_to cart_path, notice: "Cart item was successfully destroyed." }
