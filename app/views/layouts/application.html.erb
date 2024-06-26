@@ -24,8 +24,16 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% flash.each do |type, message| %>
+      <aside>
+        <% if type == "alert" %>
+          <div style="background-color:red; color:white;"><%= message %></div>
+        <% end %>
+        <% if type == "notice" %>
+          <div style="background-color:green; color:white;"><%= message %></div>
+        <% end %>
+      </aside>
+    <% end %>
     <%= yield %>
   </body>
 </html>
