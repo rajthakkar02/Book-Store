@@ -1,0 +1,23 @@
+<nav class="nav">
+  <h1 class="header">Book Store</h1>
+  <% if user_signed_in? %>
+    <h2 class="nav-title">Welcome <%= current_user.seller? ? "Seller" : "Home" %>, <%= current_user.name %></h2>
+    <div class="header-button">
+      <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: "nav-button" %>
+      <% if current_user.seller? %>
+        <%= link_to 'Add Author', authors_path, method: :get, class: "nav-button1" %>
+        <%= link_to 'Add Book', books_path, method: :get, class: "nav-button1" %>
+        <%= link_to 'Ordered Book', orders_path, method: :get, class: "nav-button1" %>
+      <% else %>
+        <%= button_to "Order History", orders_path, method: :get, class: "nav-button1" %>
+        <%= button_to "Cart", cart_path, method: :get, class: "nav-button1" %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="header-button">
+      <%= button_to 'Sign in', new_user_session_path, method: :get, class: "nav-button" %>
+      <%= button_to 'Sign up', new_user_registration_path, method: :get, class: "nav-button1" %>
+      <%= button_to "Cart", cart_path, method: :get, class: "nav-button1" %>
+    </div>
+  <% end %>
+</nav>
