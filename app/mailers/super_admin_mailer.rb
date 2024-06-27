@@ -1,10 +1,10 @@
 # app/mailers/super_admin_mailer.rb
 
 class SuperAdminMailer < ApplicationMailer
-  default from: "notifications@example.com"
+  default from: "notifications@bookstore.com"
 
   def new_seller_registration(seller_details)
     @seller_details = seller_details
-    mail(to: "superadmin@example.com", subject: "New Seller Registration")
+    mail(to: "superadmin@bookstore.com", subject: "New Seller Registration")
   end
 end

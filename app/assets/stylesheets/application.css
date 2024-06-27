@@ -45,3 +45,34 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px;
+}
+
+.nav-title {
+    margin-top: 20px;
+    color: white
+}
+
+.nav-button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.nav-button1 {
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: 5px;
+    text-align: center;
+}

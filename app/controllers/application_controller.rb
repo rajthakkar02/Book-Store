@@ -9,6 +9,18 @@ class ApplicationController < ActionController::Base
     self.class < ActiveAdmin::BaseController
   end
 
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found_method
+  rescue_from NoMethodError, with: :handle_no_method_error
+
+  def handle_no_method_error(exception)
+    flash[:alert] = "Oops! Something went wrong."
+    redirect_to root_path
+  end
+
+  def not_found_method
+    render file: Rails.public_path.join("404.html"), status: :not_found, layout: false
+  end
+
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?

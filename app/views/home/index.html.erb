@@ -1,13 +1,13 @@
 <% if user_signed_in? && current_user.seller? %>
-  <nav style="display: flex; justify-content: space-between; align-items: center; background-color: #333; padding: 10px;">
+  <nav class="nav">
     <h1 class="header">Book Store</h1>
-    <h2 style="margin-top: 20px; color: white">Welcome Seller, <%= current_user.name %></h2>
+    <h2 class="nav-title">Welcome Seller, <%= current_user.name %></h2>
     <div class="header-button">
-      <%= button_to 'Sign out', destroy_user_session_path, method: :delete, style: "margin-right: 10px; padding: 10px 20px; background-color: #b00; color: white; border: none; border-radius: 5px;" %>
+      <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: "nav-button" %>
       <br>
-      <%= link_to 'Add Author', authors_path, method: :get, style: "margin-right: 10px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; text-align: center;" %>
-      <%= link_to 'Add Book', books_path, method: :get, style: "margin-right: 10px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; text-align: center;" %>
-      <%= link_to 'Ordered Book', orders_path, method: :get, style: " margin-right: 10px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; text-align: center;" %>
+      <%= link_to 'Add Author', authors_path, method: :get, class: "nav-button1" %>
+      <%= link_to 'Add Book', books_path, method: :get, class: "nav-button1" %>
+      <%= link_to 'Ordered Book', orders_path, method: :get, class: "nav-button1" %>
     </div>
   </nav>
   <div class="graph">
@@ -66,15 +66,15 @@
     <%= pie_chart @popular_rating , title: "Books Popularity based on Ratings"%>
   </div>
 <% elsif user_signed_in? && !current_user.seller? %>
-  <nav style="display: flex; justify-content: space-between; align-items: center; background-color: #333; padding: 10px;">
+  <nav class="nav">
     <h1 class="header">Book Store</h1>
     <h2 style="color: white;">Welcome Home, <%= current_user.name %></h2>
     <div class="header-button">
-      <%= button_to 'Sign out', destroy_user_session_path, method: :delete, style: "margin-right: 10px; padding: 10px 20px; color: white; border: none; border-radius: 5px;" %>
+      <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: "nav-button" %>
       <br>
-      <%= button_to "Order History", orders_path, method: :get, style: "margin-right: 10px; padding: 10px 20px;  color: white; border: none; border-radius: 5px;" %>
+      <%= button_to "Order History", orders_path, method: :get, class: "nav-button1" %>
       <br>
-      <%= button_to "Cart", cart_path, method: :get, style: "padding: 10px 20px; color: white; border: none; border-radius: 5px;" %>
+      <%= button_to "Cart", cart_path, method: :get, class: "nav-button1" %>
     </div>
   </nav>
   <br>
@@ -119,15 +119,15 @@
     <% end %>
   </div>
 <% else %>
-  <nav style="display: flex; justify-content: space-between; align-items: center; background-color: #333; padding: 10px; margin-bottom: 40px;">
+  <nav class="nav">
     <h1 class="header">Book Store</h1>
     <div class="header-button">
-      <%= button_to 'Sign in', new_user_session_path, method: :get , style: "margin-right: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
-      <%= button_to 'Sign up', new_user_registration_path ,method: :get, style: "margin-right: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
-      <%= button_to "Cart", cart_path, method: :get, style: "margin-right: 10px; padding: 10px 20px; color: white; border: none; border-radius: 5px;" %>
+      <%= button_to 'Sign in', new_user_session_path, method: :get , class: "nav-button" %>
+      <%= button_to 'Sign up', new_user_registration_path ,method: :get, class: "nav-button1" %>
+      <%= button_to "Cart", cart_path, method: :get, class: "nav-button1" %>
     </div>
   </nav>
-  <div style="display: flex; flex-direction: row; flex-wrap: wrap;  justify-content: center; gap: 30px; margin-bottom: 20px">
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap;  justify-content: center; gap: 30px; margin-bottom: 10px; margin-top: 20px;">
     <% @books.all.each do |book| %>
       <% if book.quantity > 0 %>
         <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 30px; width: 300px; text-align: center;">
