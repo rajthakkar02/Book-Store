@@ -16,11 +16,14 @@ class Order < ApplicationRecord
   end
 
   def self.bookings_by_week
-    group_by_day_of_week(:created_at, format: "%a").count
+    where(created_at: Time.current.beginning_of_week..Time.current.end_of_week)
+      .group_by_day_of_week(:created_at, format: "%a")
+      .count
   end
 
   def self.bookings_by_month
-    group_by_month_of_year(:created_at, format: "%b").count
+    where(created_at: Time.current.beginning_of_year..Time.current.end_of_week)
+    .group_by_month_of_year(:created_at, format: "%b").count
   end
 
   def self.popular_book

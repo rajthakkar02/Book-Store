@@ -85,3 +85,23 @@
     font-weight: bold;
     font-size: x-large
 }
+
+.search-div {
+    margin-bottom: 10px;
+}
+
+.input-field {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.book {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}

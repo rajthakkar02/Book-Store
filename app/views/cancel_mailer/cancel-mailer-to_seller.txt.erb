@@ -1,0 +1,9 @@
+Dear <%= @seller.name %>,
+We regret to inform you that the order for your book, "<%= @order.book.book_name %>", has been canceled by the user.
+Here are the details of your cancelled order:
+  
+    Order Date: <%= @order.created_at.strftime('%B %d, %Y') %></li>
+    <% total_amount =  @order.quantity_of_book_order * @order.book.price%>
+    Total Amount: <%= number_to_currency(total_amount , unit: "₹ ") %>
+    
+Thank you for your understanding.

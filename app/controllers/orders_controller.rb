@@ -86,6 +86,7 @@ class OrdersController < ApplicationController
       @order.update(status: :Canceled)
       @order.increase_book_stock
       CancelMailer.cancel_mailer(current_user,@order).deliver_now
+      CancelMailer.cancel_mailer_to_seller(@order.book.user, @order).deliver_now
       redirect_to orders_url, notice: "Order was successfully canceled."
     else
       redirect_to orders_url, alert: "Order cannot be canceled as it has already been delivered."

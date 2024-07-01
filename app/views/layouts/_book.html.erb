@@ -1,0 +1,19 @@
+<% if book.quantity > 0 %>
+  <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 30px; width: 300px; text-align: center;">
+    <% if book.image.attached? %>
+      <img src="<%= url_for(book.image) %>" alt="<%= book.book_name %> cover" style="width: 150px; height: auto; margin-bottom: 10px;">
+    <% end %>
+    <h2><strong><%= book.book_name %></strong></h2>
+    <%if user_signed_in? && !current_user.seller?%>
+      <p><%=link_to "#{book.author.name}" , author_path(book.author_id) , method: :get %></p>
+    <% else %>
+      <p><%= book.author.name %></p>
+    <% end %>
+    <p><%= book.user.name %></p>
+    <p>Price: ₹<%= book.price %></p>
+    <%= button_to "Add to Cart", add_to_cart_path(book_id: book.id), method: :post, id: "add-cart-#{book.id}", style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;", onclick: "changes(#{book.id})" %>
+    <br>
+    <%= button_to "Show Details", book, method: :get, style: "margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" %>
+    <br>
+  </div>
+<% end %>

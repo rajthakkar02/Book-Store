@@ -1,0 +1,9 @@
+<p>Dear <%= @seller.name %>,</p>
+<p>We regret to inform you that the order for your book, "<%= @order.book.book_name %>", has been canceled by the user.</p>
+<p>Here are the details of your cancelled order:</p>
+  <ul>
+    <li>Order Date: <strong><%= @order.created_at.strftime('%B %d, %Y') %></strong></li>
+    <% total_amount =  @order.quantity_of_book_order * @order.book.price%>
+    <li>Total Amount: <strong><%= number_to_currency(total_amount , unit: "₹ ") %></strong></li>
+  </ul>
+<p>Thank you for your understanding.</p>
