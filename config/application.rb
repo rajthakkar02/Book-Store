@@ -12,6 +12,7 @@ module BooksStores
     config.load_defaults 7.1
 
     config.active_storage.variant_processor = :mini_magick
+    config.app_generators.scaffold_controller = :scaffold_controller
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
